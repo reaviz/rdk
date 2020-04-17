@@ -1,0 +1,30 @@
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { Portal } from '../../src';
+
+<Meta title="Docs|Components/Portal" />
+
+# Portal
+
+---
+
+The portal is a component that wraps React's `createPortal` method
+to provide a better DX for creating portals. It will automatically
+inject elements to the body rather than having to manually do that
+via the core method in React.
+
+## Demo
+This component can be used via hooks or element api.
+
+### Hook
+<Preview withSource="open">
+  <Story id="utilities-portal--hook" />
+</Preview>
+
+### Element
+<Preview withSource="open">
+  <Story id="utilities-portal--element" />
+</Preview>
+
+## API
+### [src/Portal/Portal.tsx](https://github.com/jask-oss/rdk/blob/master/src/Portal/Portal.tsx)
+<Props of={Portal} />

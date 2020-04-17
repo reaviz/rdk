@@ -1,0 +1,9 @@
+// This is to ensure the position container element
+// isn't interfering with the content element.
+.container {
+  pointer-events: none;
+
+  > * {
+    pointer-events: initial;
+  }
+}

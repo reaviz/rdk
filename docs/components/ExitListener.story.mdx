@@ -1,0 +1,19 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs|Components/Exit Listener" />
+
+# Exit Listener
+
+---
+
+The exit listener is a hook that allows developers to subscribe to
+click events and escape keyboard events on a root element.
+
+A typical example of this would be a menu, when a user opens the menu we want
+to listen for events if a user clicks anywhere but our menu to notify
+the parent to close it.
+
+## Demo
+<Preview withSource="open">
+  <Story id="utilities-exit-listener--simple" />
+</Preview>

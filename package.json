@@ -1,0 +1,107 @@
+{
+  "name": "rdk",
+  "version": "4.0.17",
+  "description": "React Component Developer Kit",
+  "scripts": {
+    "start": "start-storybook",
+    "build-storybook": "build-storybook",
+    "storybook:ci": "storybook-to-ghpages --existing-output-dir=storybook-static --ci",
+    "publish:dev": "node .circleci/publish-dev-builds.js",
+    "prettier": "prettier --loglevel warn --write 'src/**/*.{ts,tsx,js,jsx}'",
+    "publish:tag": "node .circleci/publish-tag-builds.js",
+    "build": "rollup -c"
+  },
+  "source": "src/index.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "browser": "dist/index.js",
+  "style": "dist/index.css",
+  "typings": "dist/src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jask-oss/rdk.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react"
+  ],
+  "author": "JASK",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jask-oss/rdk/issues"
+  },
+  "homepage": "https://github.com/jask-oss/rdk#readme",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "framer-motion": "^1.10.3",
+    "popper.js": "^1.16.1",
+    "react-scrolllock": "^5.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "storybook-deployer": {
+    "gitUsername": "amcdnl",
+    "gitEmail": "amcdaniel2@gmail.com",
+    "commitMessage": "deploy storybook [ci skip]"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
+    "@mdx-js/react": "^1.5.8",
+    "@storybook/addon-centered": "^5.3.17",
+    "@storybook/addon-docs": "^5.3.17",
+    "@storybook/addons": "^5.3.17",
+    "@storybook/react": "^5.3.17",
+    "@storybook/source-loader": "^5.3.17",
+    "@storybook/storybook-deployer": "^2.8.1",
+    "@types/classnames": "^2.2.10",
+    "@types/react": "^16.9.27",
+    "@types/react-dom": "^16.9.5",
+    "autoprefixer": "^9.7.5",
+    "babel-loader": "^8.1.0",
+    "husky": "^4.2.1",
+    "lint-staged": "^10.1.0",
+    "node-sass": "^4.13.1",
+    "postcss-focus-visible": "^4.0.0",
+    "prettier": "^2.0.2",
+    "react": "^16.13.1",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "react-dom": "^16.13.1",
+    "rollup": "^2.3.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-postcss": "^2.5.0",
+    "rollup-plugin-postcss-modules": "^2.0.1",
+    "rollup-plugin-sourcemaps": "^0.5.0",
+    "rollup-plugin-typescript2": "0.26.0",
+    "sass-loader": "^8.0.2",
+    "semver": "^7.1.2",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
