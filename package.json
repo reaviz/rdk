@@ -1,6 +1,6 @@
 {
   "name": "rdk",
-  "version": "4.0.18",
+  "version": "4.0.19",
   "description": "React Component Developer Kit",
   "scripts": {
     "start": "start-storybook",
@@ -27,7 +27,6 @@
   "keywords": [
     "react"
   ],
-  "author": "JASK",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/reaviz/rdk/issues"
