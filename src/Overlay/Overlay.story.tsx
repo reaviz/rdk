@@ -14,7 +14,7 @@ storiesOf('Utilities|Overlay/Portal', module)
     <div
       style={{
         width: 300,
-        height: 300,
+        height: 300
       }}
     >
       <div
@@ -24,7 +24,7 @@ storiesOf('Utilities|Overlay/Portal', module)
           background: 'black',
           padding: 50,
           position: 'relative',
-          overflow: 'hidden',
+          overflow: 'hidden'
         }}
       >
         Hello
@@ -49,7 +49,7 @@ storiesOf('Utilities|Overlay/Portal', module)
           background: 'black',
           padding: 50,
           position: 'relative',
-          overflow: 'hidden',
+          overflow: 'hidden'
         }}
       >
         Hello!
@@ -68,7 +68,7 @@ storiesOf('Utilities|Overlay/Global', module)
       <div
         style={{
           width: 300,
-          height: 300,
+          height: 300
         }}
       >
         <div
@@ -78,7 +78,7 @@ storiesOf('Utilities|Overlay/Global', module)
             background: 'black',
             padding: 50,
             position: 'relative',
-            overflow: 'hidden',
+            overflow: 'hidden'
           }}
         >
           Hello
@@ -88,7 +88,7 @@ storiesOf('Utilities|Overlay/Global', module)
                 style={{
                   background: 'blue',
                   zIndex: overlayIndex,
-                  position: 'absolute',
+                  position: 'absolute'
                 }}
               >
                 Hi - {overlayIndex}
@@ -106,7 +106,7 @@ storiesOf('Utilities|Overlay/Global', module)
       <div
         style={{
           width: 300,
-          height: 300,
+          height: 300
         }}
       >
         <div
@@ -116,7 +116,7 @@ storiesOf('Utilities|Overlay/Global', module)
             background: 'black',
             padding: 50,
             position: 'relative',
-            overflow: 'hidden',
+            overflow: 'hidden'
           }}
         >
           <button type="button" onClick={() => setOpen(true)}>
@@ -132,7 +132,7 @@ storiesOf('Utilities|Overlay/Global', module)
                 style={{
                   background: 'blue',
                   zIndex: overlayIndex,
-                  position: 'absolute',
+                  position: 'absolute'
                 }}
               >
                 Hi - {overlayIndex}
@@ -150,7 +150,7 @@ storiesOf('Utilities|Overlay/Global', module)
       <div
         style={{
           width: 300,
-          height: 300,
+          height: 300
         }}
       >
         <div
@@ -160,7 +160,7 @@ storiesOf('Utilities|Overlay/Global', module)
             background: 'black',
             padding: 50,
             position: 'relative',
-            overflow: 'hidden',
+            overflow: 'hidden'
           }}
         >
           <button type="button" onClick={() => setOpen(true)}>
@@ -181,7 +181,7 @@ storiesOf('Utilities|Overlay/Global', module)
                 style={{
                   background: 'blue',
                   zIndex: overlayIndex,
-                  position: 'absolute',
+                  position: 'absolute'
                 }}
               >
                 Hi - {overlayIndex}
@@ -194,7 +194,7 @@ storiesOf('Utilities|Overlay/Global', module)
   })
   .add('Hooks', () => {
     const { GlobalOverlay, setOpen, overlayIndex } = useGlobalOverlay({
-      onClose: () => setOpen(false),
+      onClose: () => setOpen(false)
     });
 
     return (
@@ -209,7 +209,7 @@ storiesOf('Utilities|Overlay/Global', module)
                 background: 'blue',
                 padding: 25,
                 zIndex: overlayIndex as number,
-                position: 'fixed',
+                position: 'fixed'
               }}
             >
               Hello!
@@ -229,7 +229,7 @@ storiesOf('Utilities|Overlay/Global', module)
             style={{
               display: 'flex',
               justifyContent: 'center',
-              alignItems: 'center',
+              alignItems: 'center'
             }}
           >
             <motion.div
@@ -243,7 +243,7 @@ storiesOf('Utilities|Overlay/Global', module)
                 top: 50,
                 background: 'black',
                 position: 'fixed',
-                padding: 20,
+                padding: 20
               }}
             >
               <h1>
@@ -293,7 +293,7 @@ storiesOf('Utilities|Overlay/Connected', module)
           width: 300,
           padding: 50,
           height: 300,
-          border: 'solid 1px red',
+          border: 'solid 1px red'
         }}
       >
         <ConnectedOverlay
@@ -304,7 +304,7 @@ storiesOf('Utilities|Overlay/Connected', module)
             <div
               style={{
                 background: 'black',
-                padding: 15,
+                padding: 15
               }}
             >
               <h1>Hello</h1>
@@ -325,7 +325,7 @@ storiesOf('Utilities|Overlay/Connected', module)
           width: 300,
           padding: 50,
           height: 300,
-          border: 'solid 1px red',
+          border: 'solid 1px red'
         }}
       >
         <ConnectedOverlay
@@ -336,7 +336,7 @@ storiesOf('Utilities|Overlay/Connected', module)
             <div
               style={{
                 background: 'black',
-                padding: 15,
+                padding: 15
               }}
             >
               <h1>Hello</h1>
@@ -358,7 +358,7 @@ storiesOf('Utilities|Overlay/Connected', module)
           trigger="hover"
           placement="top"
           style={{
-            pointerEvents: 'none',
+            pointerEvents: 'none'
           }}
           open={open}
           content={() => (
@@ -368,7 +368,7 @@ storiesOf('Utilities|Overlay/Connected', module)
                 background: 'rgba(0, 0, 0, .5)',
                 color: 'white',
                 textAlign: 'center',
-                borderRadius: 5,
+                borderRadius: 5
               }}
               initial={{ opacity: 0, scale: 0.3 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -397,7 +397,7 @@ storiesOf('Utilities|Overlay/Connected', module)
           width: 300,
           padding: 50,
           height: 300,
-          border: 'solid 1px red',
+          border: 'solid 1px red'
         }}
       >
         <Tooltip content="Hello">
@@ -419,7 +419,7 @@ storiesOf('Utilities|Overlay/Connected', module)
               padding: '5px 20px 5px 0',
               background: 'rgba(0, 0, 0, .5)',
               color: 'white',
-              borderRadius: 5,
+              borderRadius: 5
             }}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -441,7 +441,7 @@ storiesOf('Utilities|Overlay/Connected', module)
           width: 150,
           padding: 50,
           height: 150,
-          border: 'solid 1px red',
+          border: 'solid 1px red'
         }}
       >
         <button
