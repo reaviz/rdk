@@ -11,6 +11,7 @@ export interface GlobalOverlayCommon {
   closeOnBackdropClick?: boolean;
   hasBackdrop?: boolean;
   backdropClassName?: string;
+  onClose?: () => void;
 }
 
 export const useGlobalOverlay = (options?: GlobalOverlayCommon) => {
@@ -18,24 +19,25 @@ export const useGlobalOverlay = (options?: GlobalOverlayCommon) => {
     hasBackdrop = true,
     closeOnEscape = true,
     closeOnBackdropClick = true,
-    backdropClassName
+    backdropClassName,
+    onClose = () => undefined,
   } = options || {};
   const { OverlayPortal, ref, overlayIndex, portalIndex } = useOverlayPortal();
   const [open, setOpen] = useState<boolean>(false);
 
   const onBackdropClick = useCallback(() => {
     if (closeOnBackdropClick) {
-      setOpen(false);
+      onClose && onClose();
     }
-  }, [setOpen, closeOnBackdropClick]);
+  }, [closeOnBackdropClick]);
 
   useExitListener(ref, {
-    onEscape: () => closeOnEscape && setOpen(false)
+    onEscape: () => closeOnEscape && onClose && onClose(),
   });
 
   const Component = useCallback(
     ({ children }) => (
-      <OverlayContext.Provider value={{ close: () => setOpen(false) }}>
+      <OverlayContext.Provider value={{ close: () => onClose && onClose() }}>
         <AnimatePresence>
           {open && (
             <OverlayPortal>
@@ -64,6 +66,6 @@ export const useGlobalOverlay = (options?: GlobalOverlayCommon) => {
     isOpen: open,
     setOpen,
     ref,
-    GlobalOverlay: Component
+    GlobalOverlay: Component,
   };
 };

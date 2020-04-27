@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect } from 'react';
 import { GlobalOverlayCommon, useGlobalOverlay } from './useGlobalOverlay';
 
 export interface GlobalOverlayProps extends GlobalOverlayCommon {
@@ -20,24 +20,12 @@ export const GlobalOverlay: FC<GlobalOverlayProps> = ({
     overlayIndex,
     portalIndex,
     setOpen,
-    isOpen
-  } = useGlobalOverlay(rest);
-  const mounted = useRef<boolean>(false);
+  } = useGlobalOverlay({ onClose, ...rest });
   const renderFn = children || render;
 
   useEffect(() => {
     setOpen(open);
   }, [open]);
-
-  useEffect(() => {
-    if (mounted.current) {
-      if (!isOpen) {
-        onClose && onClose();
-      }
-    } else {
-      mounted.current = true;
-    }
-  }, [isOpen]);
 
   return <Component>{() => renderFn({ overlayIndex, portalIndex })}</Component>;
 };
