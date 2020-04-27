@@ -1,6 +1,6 @@
 {
   "name": "rdk",
-  "version": "4.0.20",
+  "version": "4.0.21",
   "description": "React Component Developer Kit",
   "scripts": {
     "start": "start-storybook",
