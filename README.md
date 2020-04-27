@@ -1,7 +1,7 @@
 <p align="center">
   <h1>🛠 RDK - Component ToolKit</h1>
-  <a href="https://circleci.com/gh/jask-oss/rdk">
-    <img src="https://circleci.com/gh/jask-oss/rdk.svg?style=svg" />
+  <a href="https://circleci.com/gh/reaviz/rdk">
+    <img src="https://circleci.com/gh/reaviz/rdk.svg?style=svg" />
   </a>
   <a href="https://npm.im/rdk">
     <img src="https://img.shields.io/npm/v/rdk.svg" />
@@ -9,7 +9,7 @@
   <a href="https://npm.im/rdk">
     <img src="https://badgen.net/npm/dw/rdk" />
   </a>
-  <a href="https://github.com/jask-oss/rdk/blob/master/LICENSE">
+  <a href="https://github.com/reaviz/rdk/blob/master/LICENSE">
     <img src="https://badgen.now.sh/badge/license/apache2" />
   </a>
   <a href="https://bundlephobia.com/result?p=rdk">
@@ -24,7 +24,7 @@ component libraries. The tooling abstracts the visual
 presentation so the tools can be used with any visual presentation.
 
 ## 🚀 Quick Links
-- Checkout the [demos and docs](https://jask-oss.github.io/rdk/)
+- Checkout the [demos and docs](https://reaviz.github.io/rdk/)
 
 ## ✨ Features
 
@@ -62,7 +62,7 @@ locked to that specific version.
 }
 ```
 
-Visit the [demos page](https://jask-oss.github.io/rdk/) to learn more!
+Visit the [demos page](https://reaviz.github.io/rdk/) to learn more!
 
 ## 🔭 Development
 

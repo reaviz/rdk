@@ -1,6 +1,6 @@
 {
   "name": "rdk",
-  "version": "4.0.17",
+  "version": "4.0.18",
   "description": "React Component Developer Kit",
   "scripts": {
     "start": "start-storybook",
@@ -19,7 +19,7 @@
   "typings": "dist/src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jask-oss/rdk.git"
+    "url": "git+https://github.com/reaviz/rdk.git"
   },
   "files": [
     "dist"
@@ -30,9 +30,9 @@
   "author": "JASK",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/jask-oss/rdk/issues"
+    "url": "https://github.com/reaviz/rdk/issues"
   },
-  "homepage": "https://github.com/jask-oss/rdk#readme",
+  "homepage": "https://github.com/reaviz/rdk#readme",
   "dependencies": {
     "classnames": "^2.2.6",
     "framer-motion": "^1.10.3",

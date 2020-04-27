@@ -6,7 +6,7 @@ import { create } from '@storybook/theming';
 const theme = create({
   base: 'dark',
   brandTitle: 'RDK',
-  url: 'https://github.com/jask-oss/rdk'
+  url: 'https://github.com/reaviz/rdk'
 });
 
 // Customize the UI a bit
