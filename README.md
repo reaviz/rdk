@@ -73,5 +73,5 @@ If you want to run RDK locally, its super easy!
 - `yarn start`
 - Browser opens to Storybook page
 
-## 🔗Credits
+## 🔗 Credits
 This repo is the community lead fork of [https://github.com/jask-oss/rdk](https://github.com/jask-oss/rdk).
