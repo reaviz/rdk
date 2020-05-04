@@ -83,6 +83,13 @@ jobs:
       - *attach_workspace
       - run: yarn storybook:ci
 
+  chroma:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *attach_workspace
+      - run: chromatic --project-token=uktab5dt17b --exit-zero-on-changes
+
   publish_dev_npm:
     <<: *job_defaults
     steps:

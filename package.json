@@ -9,7 +9,8 @@
     "publish:dev": "node .circleci/publish-dev-builds.js",
     "prettier": "prettier --loglevel warn --write 'src/**/*.{ts,tsx,js,jsx}'",
     "publish:tag": "node .circleci/publish-tag-builds.js",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "chromatic": "chromatic --project-token=uktab5dt17b --exit-zero-on-changes"
   },
   "source": "src/index.ts",
   "main": "dist/index.cjs.js",
@@ -71,6 +72,7 @@
     "@types/react-dom": "^16.9.5",
     "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",
+    "chromatic": "^4.0.2",
     "husky": "^4.2.1",
     "lint-staged": "^10.1.0",
     "node-sass": "^4.13.1",
