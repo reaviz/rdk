@@ -27,17 +27,17 @@ export const useGlobalOverlay = (options?: GlobalOverlayCommon) => {
 
   const onBackdropClick = useCallback(() => {
     if (closeOnBackdropClick) {
-      onClose && onClose();
+      onClose?.();
     }
   }, [closeOnBackdropClick]);
 
   useExitListener(ref, {
-    onEscape: () => closeOnEscape && onClose && onClose(),
+    onEscape: () => closeOnEscape && onClose?.(),
   });
 
   const Component = useCallback(
     ({ children }) => (
-      <OverlayContext.Provider value={{ close: () => onClose && onClose() }}>
+      <OverlayContext.Provider value={{ close: () => onClose?.() }}>
         <AnimatePresence>
           {open && (
             <OverlayPortal>
@@ -66,6 +66,6 @@ export const useGlobalOverlay = (options?: GlobalOverlayCommon) => {
     isOpen: open,
     setOpen,
     ref,
-    GlobalOverlay: Component,
+    GlobalOverlay: Component
   };
 };

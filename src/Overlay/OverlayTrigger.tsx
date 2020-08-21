@@ -1,6 +1,6 @@
 import React, { useCallback, forwardRef, Ref, FC } from 'react';
 
-export type TriggerTypes = 'hover' | 'click' | 'focus' | 'key';
+export type TriggerTypes = 'hover' | 'click' | 'contextmenu' | 'focus' | 'key';
 
 interface OverlayTriggerEvent {
   type: TriggerTypes;
@@ -89,6 +89,13 @@ export const OverlayTrigger: FC<OverlayTriggerProps & {
       [onActivate, onDeactivate, hasTrigger]
     );
 
+    const onContextMenu = useCallback(event => {
+      if (hasTrigger('contextmenu')) {
+        event.preventDefault();
+        onActivate({ type: 'contextmenu', nativeEvent: event });
+      }
+    }, []);
+
     const tabIndex = hasTrigger('focus') ? -1 : undefined;
 
     return (
@@ -100,6 +107,7 @@ export const OverlayTrigger: FC<OverlayTriggerProps & {
         onFocus={onFocus}
         onBlur={onBlur}
         onClick={onClick}
+        onContextMenu={onContextMenu}
         className={className}
       >
         {children}

@@ -464,4 +464,64 @@ storiesOf('Utilities|Overlay/Connected', module)
         </Menu>
       </div>
     );
+  })
+  .add('Context Menu Example', () => {
+    const ContextMenu = ({ children, content }) => {
+      const timeout = React.useRef<any>();
+      const [open, setOpen] = React.useState(false);
+
+      return (
+        <ConnectedOverlay
+          trigger="contextmenu"
+          placement="bottom"
+          open={open}
+          content={() => (
+            <motion.div
+              style={{
+                padding: 5,
+                background: 'rgba(0, 0, 0, .5)',
+                color: 'white',
+                borderRadius: 5
+              }}
+              initial={{ opacity: 0, y: -25 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -25 }}
+            >
+              {content}
+            </motion.div>
+          )}
+          onActivate={() => {
+            clearTimeout(timeout.current);
+            setOpen(true);
+          }}
+          onDeactivate={() => {
+            clearTimeout(timeout.current);
+            timeout.current = setTimeout(() => setOpen(false), 100);
+          }}
+        >
+          {children}
+        </ConnectedOverlay>
+      );
+    };
+
+    return (
+      <div
+        style={{
+          width: 300,
+          padding: 50,
+          height: 300,
+          border: 'solid 1px red'
+        }}
+      >
+        <ContextMenu content={
+          <ul>
+            <li>Foo</li>
+            <li>Bar</li>
+            <li>Baz</li>
+          </ul>
+        }>
+          <span style={{ padding: 10, background: 'blue' }}>Hi!</span>
+        </ContextMenu>
+      </div>
+    );
   });

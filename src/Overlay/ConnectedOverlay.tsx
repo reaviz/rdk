@@ -60,7 +60,7 @@ export const ConnectedOverlay: FC<ConnectedOverlayProps & {
 
     useImperativeHandle(ref, () => ({
       updatePosition: () => {
-        popperRef && popperRef.current && popperRef.current.scheduleUpdate();
+        popperRef?.current?.scheduleUpdate();
       }
     }));
 
