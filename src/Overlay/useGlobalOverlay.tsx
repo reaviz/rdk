@@ -40,7 +40,7 @@ export const useGlobalOverlay = (options?: GlobalOverlayCommon) => {
       <OverlayContext.Provider value={{ close: () => onClose?.() }}>
         <AnimatePresence>
           {open && (
-            <OverlayPortal>
+            <OverlayPortal key={`go-${portalIndex}`}>
               {hasBackdrop && (
                 <Backdrop
                   zIndex={overlayIndex as number}

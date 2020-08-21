@@ -73,7 +73,7 @@ export const useConnectedOverlay = (
         <AnimatePresence>
           {open && (
             appendToBody ? (
-              <OverlayPortal>
+              <OverlayPortal key={`co-${overlayIndex}`}>
                 <div
                   ref={positionRef}
                   style={{ zIndex: overlayIndex as number, ...(style || {}) }}
@@ -84,6 +84,7 @@ export const useConnectedOverlay = (
               </OverlayPortal>
             ) : (
               <div
+                key={`co-${overlayIndex}`}
                 ref={positionRef}
                 style={{ zIndex: overlayIndex as number, ...(style || {}) }}
                 className={className}
