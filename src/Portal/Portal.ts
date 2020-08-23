@@ -28,9 +28,9 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
     const mounted = useRef<boolean>(false);
 
     useLayoutEffect(() => {
-      onMount && onMount();
+      onMount?.();
       return () => {
-        onUnmount && onUnmount();
+        onUnmount?.();
         document.body.removeChild(elementRef.current);
       };
     }, []);

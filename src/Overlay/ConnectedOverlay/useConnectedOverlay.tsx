@@ -1,9 +1,9 @@
 import React, { useCallback, useState, RefObject } from 'react';
-import { usePosition, ReferenceProp, Placement } from '../Position';
+import { usePosition, ReferenceProp, Placement } from '../../Position';
 import { AnimatePresence } from 'framer-motion';
-import { useExitListener } from '../ExitListener';
-import { useOverlayPortal } from './useOverlayPortal';
-import { OverlayContext } from './OverlayContext';
+import { useExitListener } from '../../ExitListener';
+import { useOverlayPortal } from '../OverlayPortal';
+import { OverlayContext } from '../OverlayContext';
 
 export interface ConnectedOverlayHookOptions extends ConnectedOverlayCommon {
   closeOnBodyClick?: boolean;

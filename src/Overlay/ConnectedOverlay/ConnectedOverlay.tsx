@@ -7,8 +7,8 @@ import React, {
   Ref,
   useImperativeHandle
 } from 'react';
-import { TriggerTypes, OverlayTrigger } from './OverlayTrigger';
-import { ReferenceProp } from '../Position';
+import { TriggerTypes, OverlayTrigger } from '../OverlayTrigger';
+import { ReferenceProp } from '../../Position';
 import {
   ConnectedOverlayHookOptions,
   useConnectedOverlay

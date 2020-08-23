@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import ScrollLock from 'react-scrolllock';
-import { OverlayContext } from './OverlayContext';
+import { OverlayContext } from '../OverlayContext';
 import { AnimatePresence } from 'framer-motion';
-import { useOverlayPortal } from './useOverlayPortal';
-import { useExitListener } from '../ExitListener';
-import { Backdrop } from '../Backdrop';
+import { useOverlayPortal } from '../OverlayPortal';
+import { useExitListener } from '../../ExitListener';
+import { Backdrop } from '../../Backdrop';
 
 export interface GlobalOverlayCommon {
   closeOnEscape?: boolean;
