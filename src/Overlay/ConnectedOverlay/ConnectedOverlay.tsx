@@ -24,6 +24,7 @@ export interface ConnectedOverlayProps extends ConnectedOverlayHookOptions {
   reference?: ReferenceProp;
   content: any;
   trigger?: TriggerTypes[] | TriggerTypes;
+  triggerElement?: any;
   onActivate?: (event?: OverlayEvent) => void;
   onDeactivate?: (event?: OverlayEvent) => void;
 }
@@ -41,6 +42,7 @@ export const ConnectedOverlay: FC<ConnectedOverlayProps & {
       children,
       open,
       content,
+      triggerElement,
       trigger = 'click' as TriggerTypes,
       onActivate,
       onDeactivate,
@@ -85,13 +87,14 @@ export const ConnectedOverlay: FC<ConnectedOverlayProps & {
         {children &&
           (trigger ? (
             <OverlayTrigger
+              elementType={triggerElement}
               ref={overlayTriggerRef}
               trigger={trigger}
               onActivate={event => {
-                onActivate && onActivate(event);
+                onActivate?.(event);
               }}
               onDeactivate={event => {
-                onDeactivate && onDeactivate(event);
+                onDeactivate?.(event);
               }}
             >
               {children}

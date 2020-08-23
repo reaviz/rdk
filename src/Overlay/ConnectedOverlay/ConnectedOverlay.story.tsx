@@ -195,6 +195,7 @@ storiesOf('Utilities|Overlay/Connected Overlay', module)
         <ConnectedOverlay
           trigger="contextmenu"
           placement="bottom"
+          triggerElement="div"
           open={open}
           content={() => (
             <motion.div

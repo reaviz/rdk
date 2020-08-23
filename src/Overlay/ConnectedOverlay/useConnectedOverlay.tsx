@@ -9,6 +9,7 @@ export interface ConnectedOverlayHookOptions extends ConnectedOverlayCommon {
   closeOnBodyClick?: boolean;
   closeOnEscape?: boolean;
   appendToBody?: boolean;
+  elementType?: string;
 }
 
 export interface ConnectedOverlayCommon {
@@ -26,6 +27,7 @@ export const useConnectedOverlay = (
   const {
     closeOnBodyClick = true,
     closeOnEscape = true,
+    elementType,
     style = {},
     className,
     appendToBody = true,
@@ -73,7 +75,7 @@ export const useConnectedOverlay = (
         <AnimatePresence>
           {open && (
             appendToBody ? (
-              <OverlayPortal key={`co-${overlayIndex}`}>
+              <OverlayPortal key={`co-${overlayIndex}`} elementType={elementType}>
                 <div
                   ref={positionRef}
                   style={{ zIndex: overlayIndex as number, ...(style || {}) }}

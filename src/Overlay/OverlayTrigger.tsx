@@ -10,6 +10,7 @@ interface OverlayTriggerEvent {
 interface OverlayTriggerProps {
   children?: any;
   className?: string;
+  elementType?: any;
   trigger: TriggerTypes | TriggerTypes[];
   onActivate: (event: OverlayTriggerEvent) => void;
   onDeactivate: (event: OverlayTriggerEvent) => void;
@@ -22,6 +23,7 @@ export const OverlayTrigger: FC<OverlayTriggerProps & {
     {
       children,
       className,
+      elementType = 'span',
       trigger = ['click'],
       onActivate,
       onDeactivate
@@ -97,9 +99,10 @@ export const OverlayTrigger: FC<OverlayTriggerProps & {
     }, []);
 
     const tabIndex = hasTrigger('focus') ? -1 : undefined;
+    const Component = elementType;
 
     return (
-      <span
+      <Component
         ref={ref}
         tabIndex={tabIndex}
         onMouseEnter={onMouseEnter}
@@ -111,7 +114,7 @@ export const OverlayTrigger: FC<OverlayTriggerProps & {
         className={className}
       >
         {children}
-      </span>
+      </Component>
     );
   }
 );
