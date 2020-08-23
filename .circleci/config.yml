@@ -121,11 +121,4 @@ workflows:
       - build_storybook:
           requires:
             - prepare
-      - publish_storybook:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - build_storybook
-            - build_package
+
