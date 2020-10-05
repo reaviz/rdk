@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { OverlayPortal } from './OverlayPortal';
 import { useOverlayPortal } from './useOverlayPortal';
 
-storiesOf('Utilities|Overlay/Overlay Portal', module)
+storiesOf('Utilities/Overlay/Overlay Portal', module)
   .add('Element', () => (
     <div
       style={{

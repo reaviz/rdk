@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Backdrop } from './Backdrop';
 import { useState } from '@storybook/addons';
 
-storiesOf('Utilities|Backdrop', module).add('Simple', () => {
+storiesOf('Utilities/Backdrop', module).add('Simple', () => {
   const [visible, setVisible] = useState(false);
 
   return (

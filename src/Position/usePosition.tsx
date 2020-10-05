@@ -1,4 +1,4 @@
-import { useRef, useCallback, useLayoutEffect, RefObject, useMemo } from 'react';
+import { useRef, useLayoutEffect, RefObject, useMemo } from 'react';
 import PopperJS from 'popper.js';
 
 export type Placement = PopperJS.Placement;
@@ -75,17 +75,27 @@ export const usePosition = (
     return refElement;
   }, [followCursor, reference, refPointer, mouse]);
 
-  const onMouseMove = useCallback(({ pageX, pageY }: MouseEvent) => {
-    mouse.current = { pageX, pageY };
-    popper.current?.scheduleUpdate();
-  }, []);
-
   useLayoutEffect(() => {
+    let rqf;
+
+    const onMouseMove = ({ pageX, pageY }: MouseEvent) => {
+      mouse.current = { pageX, pageY };
+      popper.current?.scheduleUpdate();
+    };
+
+    const onWindowScroll = () => {
+      rqf = requestAnimationFrame(() => {
+        popper.current?.scheduleUpdate();
+      });
+    };
+
     if (elementRef.current && popperRef) {
       popper.current = new PopperJS(popperRef, elementRef.current, {
         placement: placement || 'top',
         modifiers: modifiers || {},
         onCreate: () => {
+          window.addEventListener('scroll', onWindowScroll);
+
           if (followCursor) {
             window.addEventListener('mousemove', onMouseMove);
           }
@@ -96,6 +106,10 @@ export const usePosition = (
     return () => {
       if (!elementRef.current) {
         popper.current?.destroy();
+
+        cancelAnimationFrame(rqf);
+        window.removeEventListener('scroll', onWindowScroll);
+
         if (followCursor) {
           window.removeEventListener('mousemove', onMouseMove);
         }

@@ -4,7 +4,7 @@ import { Position, PositionRef } from './Position';
 import { useRef } from '@storybook/addons';
 import { usePosition } from './usePosition';
 
-storiesOf('Utilities|Position', module)
+storiesOf('Utilities/Position', module)
   .add('Element', () => {
     const ref = useRef<HTMLDivElement | null>(null);
     const positionRef = useRef<PositionRef | null>(null);

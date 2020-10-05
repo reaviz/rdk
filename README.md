@@ -25,6 +25,7 @@ presentation so the tools can be used with any visual presentation.
 
 ## 🚀 Quick Links
 - Checkout the [demos and docs](https://reaviz.github.io/rdk/)
+- Explore the library on [Chroma](https://www.chromatic.com/library?appId=5eb06076aebb8f00227a5659)
 
 ## ✨ Features
 
@@ -33,6 +34,7 @@ presentation so the tools can be used with any visual presentation.
 - Portal - Provides a flexible system for rendering dynamic content into an application
 - Position - Provides a flexible system for placing panels related to other elements
 - Backdrop - Blocker element overlay
+- Id - A unique ID hook
 
 ## 📦 Install
 

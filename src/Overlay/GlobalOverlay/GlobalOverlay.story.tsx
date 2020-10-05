@@ -5,7 +5,7 @@ import { useState } from '@storybook/addons';
 import { motion } from 'framer-motion';
 import { useGlobalOverlay } from './useGlobalOverlay';
 
-storiesOf('Utilities|Overlay/Global Overlay', module)
+storiesOf('Utilities/Overlay/Global Overlay', module)
   .add('Auto Open', () => {
     const [open, setOpen] = useState(true);
 
