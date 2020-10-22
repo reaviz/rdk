@@ -1,7 +1,7 @@
 <p align="center">
   <h1>🛠 RDK - Component ToolKit</h1>
-  <a href="https://circleci.com/gh/reaviz/rdk">
-    <img src="https://circleci.com/gh/reaviz/rdk.svg?style=svg" />
+  <a href="https://github.com/reaviz/rdk/workflows/build/">
+    <img src="https://github.com/reaviz/rdk/workflows/build/badge.svg?branch=master" />
   </a>
   <a href="https://npm.im/rdk">
     <img src="https://img.shields.io/npm/v/rdk.svg" />

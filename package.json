@@ -6,9 +6,7 @@
     "start": "start-storybook",
     "build-storybook": "build-storybook",
     "storybook:ci": "storybook-to-ghpages --existing-output-dir=storybook-static --ci",
-    "publish:dev": "node .circleci/publish-dev-builds.js",
     "prettier": "prettier --loglevel warn --write 'src/**/*.{ts,tsx,js,jsx}'",
-    "publish:tag": "node .circleci/publish-tag-builds.js",
     "build": "rollup -c",
     "chromatic": "chromatic --project-token=uktab5dt17b --exit-zero-on-changes"
   },
@@ -90,7 +88,6 @@
     "rollup-plugin-sourcemaps": "^0.6.2",
     "rollup-plugin-typescript2": "0.26.0",
     "sass-loader": "^10.0.2",
-    "semver": "^7.3.2",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7"
   },
