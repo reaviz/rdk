@@ -44,26 +44,6 @@ To use RDK in your project, install it via npm/yarn:
 yarn add rdk
 ```
 
-#### Development Builds
-Our continuous integration server runs all tests on every commit to master and
-if they pass it will publish a new development build to NPM and tag it with the `@dev` tag.
-This means that if you want the bleeding edge of `rdk` you can simply do:
-
-```bash
-yarn add rdk@dev
-```
-
-This will install the version currently tagged as `@dev`. Your `package.json` file will be
-locked to that specific version.
-
-```js
-{
-  "dependencies": {
-    "rdk": "3.0.0-dev-master.a0d076d"
-  }
-}
-```
-
 Visit the [demos page](https://reaviz.github.io/rdk/) to learn more!
 
 ## 🔭 Development
