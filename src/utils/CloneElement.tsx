@@ -27,9 +27,9 @@ export function CloneElement<T = any>({
         const childProp = childProps[key];
 
         if (typeof prop === 'function' && typeof childProp === 'function') {
-          acc[key] = (args) => {
-            prop(args);
-            childProp(args);
+          acc[key] = (...args) => {
+            prop(...args);
+            childProp(...args);
           };
         } else if (key === 'className') {
           acc[key] = classNames(prop, childProp);
