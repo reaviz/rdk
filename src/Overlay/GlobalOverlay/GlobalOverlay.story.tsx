@@ -4,6 +4,7 @@ import { GlobalOverlay } from './GlobalOverlay';
 import { useState } from '@storybook/addons';
 import { motion } from 'framer-motion';
 import { useGlobalOverlay } from './useGlobalOverlay';
+import { useOverlay } from '../useOverlay';
 
 storiesOf('Utilities/Overlay/Global Overlay', module)
   .add('Auto Open', () => {
