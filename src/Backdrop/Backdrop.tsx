@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, Fragment } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import classNames from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
 import css from './Backdrop.module.scss';
@@ -19,17 +19,15 @@ export const Backdrop: FC<BackdropProps> = ({
   onClick = () => undefined
 }) => (
   <AnimatePresence>
-    <Fragment>
-      {visible && (
-        <motion.div
-          className={classNames(css.backdrop, className)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 - portalIndex / 10 }}
-          exit={{ opacity: 0 }}
-          onClick={onClick}
-          style={{ zIndex }}
-        />
-      )}
-    </Fragment>
+    {visible && (
+      <motion.div
+        className={classNames(css.backdrop, className)}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.8 - portalIndex / 10 }}
+        exit={{ opacity: 0 }}
+        onClick={onClick}
+        style={{ zIndex }}
+      />
+    )}
   </AnimatePresence>
 );
