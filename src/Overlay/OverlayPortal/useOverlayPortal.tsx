@@ -21,10 +21,10 @@ export const useOverlayPortal = (props: Partial<PortalProps> = {}) => {
 
       setPortalIndex(pidx);
       setOverlayIndex(START_INDEX + pidx * 2 + 1);
-      props.onMount && props.onMount();
+      props.onMount?.();
     },
     onUnmount: () => {
-      props.onUnmount && props.onUnmount();
+      props.onUnmount?.();
       portals.splice(portals.indexOf(id), 1);
       setPortalIndex(null);
       setOverlayIndex(null);
