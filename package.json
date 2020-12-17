@@ -85,6 +85,7 @@
     "rollup-plugin-postcss-modules": "^2.0.2",
     "rollup-plugin-sourcemaps": "^0.6.2",
     "rollup-plugin-typescript2": "0.26.0",
+    "storybook-css-modules-preset": "^1.0.5",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7"
   },
