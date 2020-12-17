@@ -16,6 +16,12 @@ export interface PortalProps {
   onUnmount?: () => void;
 }
 
+const useUnmount = (fn) => {
+  const fnRef = useRef(fn);
+  fnRef.current = fn;
+  useLayoutEffect(() => () => fnRef.current(), []);
+};
+
 export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
   (
     {
@@ -38,11 +44,12 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
 
     useLayoutEffect(() => {
       onMount?.();
-      return () => {
-        onUnmount?.();
-        document.body.removeChild(elementRef.current);
-      };
     }, []);
+
+    useUnmount(() => {
+      onUnmount?.();
+      document.body.removeChild(elementRef.current);
+    });
 
     if (!mounted.current) {
       mounted.current = true;
