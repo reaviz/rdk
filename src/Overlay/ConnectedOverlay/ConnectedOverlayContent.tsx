@@ -16,6 +16,7 @@ export interface ConnectedOverlayContentRef {
 export interface ConnectedOverlayContentProps {
   modifiers?: any;
   followCursor?: boolean;
+  portalClassName?: string;
   placement?: Placement;
   triggerRef: any;
   children: any;
@@ -26,13 +27,16 @@ export interface ConnectedOverlayContentProps {
   onClose?: (event?: any) => void;
 }
 
-export const ConnectedOverlayContent: FC<ConnectedOverlayContentProps & {
-  ref?: Ref<ConnectedOverlayContentRef>;
-}> = forwardRef(
+export const ConnectedOverlayContent: FC<
+  ConnectedOverlayContentProps & {
+    ref?: Ref<ConnectedOverlayContentRef>;
+  }
+> = forwardRef(
   (
     {
       triggerRef,
       children,
+      portalClassName,
       closeOnBodyClick = true,
       closeOnEscape = true,
       elementType,
@@ -43,48 +47,48 @@ export const ConnectedOverlayContent: FC<ConnectedOverlayContentProps & {
       onClose
     },
     ref
-  ) =>
-{
-  const [positionRef, popperRef] = usePosition(triggerRef, {
-    followCursor,
-    modifiers,
-    placement
-  });
+  ) => {
+    const [positionRef, popperRef] = usePosition(triggerRef, {
+      followCursor,
+      modifiers,
+      placement
+    });
 
-  useImperativeHandle(ref, () => ({
-    updatePosition: () => {
-      popperRef?.current?.scheduleUpdate();
-    }
-  }));
-
-  useExitListener({
-    open: true,
-    ref: positionRef,
-    onClickOutside: event => {
-      if (closeOnBodyClick) {
-        let ref: HTMLElement | null = null;
-        if ((triggerRef as RefObject<HTMLElement>).current) {
-          ref = (triggerRef as RefObject<HTMLElement>)
-            .current as HTMLElement;
-        } else if ((triggerRef as HTMLElement).contains !== undefined) {
-          ref = triggerRef as HTMLElement;
-        }
-
-        if (ref && !ref.contains(event.target as any)) {
-          onClose?.(event as any);
-        }
+    useImperativeHandle(ref, () => ({
+      updatePosition: () => {
+        popperRef?.current?.scheduleUpdate();
       }
-    },
-    onEscape: () => closeOnEscape && onClose?.()
-  });
+    }));
 
-  return (
-    <OverlayPortal
-      ref={positionRef}
-      elementType={elementType}
-      appendToBody={appendToBody}
-    >
-      {children}
-    </OverlayPortal>
-  );
-});
+    useExitListener({
+      open: true,
+      ref: positionRef,
+      onClickOutside: (event) => {
+        if (closeOnBodyClick) {
+          let ref: HTMLElement | null = null;
+          if ((triggerRef as RefObject<HTMLElement>).current) {
+            ref = (triggerRef as RefObject<HTMLElement>).current as HTMLElement;
+          } else if ((triggerRef as HTMLElement).contains !== undefined) {
+            ref = triggerRef as HTMLElement;
+          }
+
+          if (ref && !ref.contains(event.target as any)) {
+            onClose?.(event as any);
+          }
+        }
+      },
+      onEscape: () => closeOnEscape && onClose?.()
+    });
+
+    return (
+      <OverlayPortal
+        ref={positionRef}
+        className={portalClassName}
+        elementType={elementType}
+        appendToBody={appendToBody}
+      >
+        {children}
+      </OverlayPortal>
+    );
+  }
+);

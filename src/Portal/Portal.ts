@@ -4,12 +4,14 @@ import {
   FC,
   useLayoutEffect,
   useRef,
-  Ref
+  Ref,
+  useEffect
 } from 'react';
 import { createPortal } from 'react-dom';
 
 export interface PortalProps {
   element?: string;
+  className?: string;
   onMount?: () => void;
   onUnmount?: () => void;
 }
@@ -18,6 +20,7 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
   (
     {
       children,
+      className,
       element = 'div',
       onMount = () => undefined,
       onUnmount = () => undefined
@@ -26,6 +29,12 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
   ) => {
     const elementRef = useRef<HTMLElement>(document.createElement(element));
     const mounted = useRef<boolean>(false);
+
+    useEffect(() => {
+      if (className) {
+        elementRef.current.setAttribute('class', className);
+      }
+    }, [className]);
 
     useLayoutEffect(() => {
       onMount?.();
