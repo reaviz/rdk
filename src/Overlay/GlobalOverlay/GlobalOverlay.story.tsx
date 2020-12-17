@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { GlobalOverlay } from './GlobalOverlay';
 import { useState } from '@storybook/addons';
 import { motion } from 'framer-motion';
-import { useGlobalOverlay } from './useGlobalOverlay';
 import { useOverlay } from '../useOverlay';
 
 storiesOf('Utilities/Overlay/Global Overlay', module)
@@ -21,7 +20,7 @@ storiesOf('Utilities/Overlay/Global Overlay', module)
           style={{
             width: 300,
             height: 300,
-            background: 'black',
+            border: 'solid 1px blue',
             padding: 50,
             position: 'relative',
             overflow: 'hidden'
@@ -34,7 +33,9 @@ storiesOf('Utilities/Overlay/Global Overlay', module)
                 style={{
                   background: 'blue',
                   zIndex: overlayIndex,
-                  position: 'absolute'
+                  position: 'absolute',
+                  width: 500,
+                  height: 300
                 }}
               >
                 Hi - {overlayIndex}
@@ -78,7 +79,9 @@ storiesOf('Utilities/Overlay/Global Overlay', module)
                 style={{
                   background: 'blue',
                   zIndex: overlayIndex,
-                  position: 'absolute'
+                  position: 'absolute',
+                  width: 500,
+                  height: 300
                 }}
               >
                 Hi - {overlayIndex}
@@ -127,7 +130,9 @@ storiesOf('Utilities/Overlay/Global Overlay', module)
                 style={{
                   background: 'blue',
                   zIndex: overlayIndex,
-                  position: 'absolute'
+                  position: 'absolute',
+                  width: 500,
+                  height: 300
                 }}
               >
                 Hi - {overlayIndex}
@@ -138,85 +143,8 @@ storiesOf('Utilities/Overlay/Global Overlay', module)
       </div>
     );
   })
-  .add('Hooks', () => {
-    const { GlobalOverlay, setOpen, overlayIndex } = useGlobalOverlay({
-      onClose: () => setOpen(false)
-    });
-
-    return (
-      <Fragment>
-        <button type="button" onClick={() => setOpen(true)}>
-          Open
-        </button>
-        <GlobalOverlay>
-          {() => (
-            <div
-              style={{
-                background: 'blue',
-                padding: 25,
-                zIndex: overlayIndex as number,
-                position: 'fixed'
-              }}
-            >
-              Hello!
-            </div>
-          )}
-        </GlobalOverlay>
-      </Fragment>
-    );
-  })
   .add('Dialog Example', () => {
     const [open, setOpen] = useState(false);
-
-    const Dialog = ({ visible, header, children, onClose }) => (
-      <GlobalOverlay open={visible} onClose={onClose}>
-        {({ overlayIndex }) => (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: '-20%' }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: '20%' }}
-              transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
-              style={{
-                zIndex: overlayIndex,
-                width: 300,
-                top: 50,
-                background: 'black',
-                position: 'fixed',
-                padding: 20
-              }}
-            >
-              <h1>
-                {header}
-                <button type="button" onClick={onClose}>
-                  X
-                </button>
-              </h1>
-              {children}
-            </motion.div>
-          </div>
-        )}
-      </GlobalOverlay>
-    );
-
-    const MyDialog = () => {
-      const { close } = useOverlay();
-      return (
-        <div>
-          <h1>Whats up?</h1>
-          <button type="button" onClick={close}>
-            Close
-          </button>
-        </div>
-      );
-    };
-
     return (
       <Fragment>
         <button type="button" onClick={() => setOpen(true)}>
@@ -229,3 +157,52 @@ storiesOf('Utilities/Overlay/Global Overlay', module)
     );
   });
 
+
+const Dialog = ({ visible, header, children, onClose }) => (
+  <GlobalOverlay open={visible} onClose={onClose}>
+    {({ overlayIndex }) => (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: '-20%' }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: '20%' }}
+          transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
+          style={{
+            zIndex: overlayIndex,
+            width: 300,
+            top: 50,
+            background: 'black',
+            position: 'fixed',
+            padding: 20
+          }}
+        >
+          <h1>
+            {header}
+            <button type="button" onClick={onClose}>
+              X
+            </button>
+          </h1>
+          {children}
+        </motion.div>
+      </div>
+    )}
+  </GlobalOverlay>
+);
+
+const MyDialog = () => {
+  const { close } = useOverlay();
+  return (
+    <div>
+      <h1>Whats up?</h1>
+      <button type="button" onClick={close}>
+        Close
+      </button>
+    </div>
+  );
+};

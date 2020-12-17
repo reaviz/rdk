@@ -1,39 +1,45 @@
 import { RefObject, useLayoutEffect } from 'react';
 
 interface ExitListenerOptions {
+  ref: RefObject<HTMLElement | null>;
+  open: boolean;
   onClickOutside?: (event: MouseEvent) => void;
   onEscape?: (event: KeyboardEvent) => void;
 }
 
-export const useExitListener = (
-  ref: RefObject<HTMLElement | null>,
-  options: ExitListenerOptions
-) => {
+export const useExitListener = ({
+  ref,
+  open,
+  onClickOutside,
+  onEscape
+}: ExitListenerOptions) => {
   useLayoutEffect(() => {
     const handleClick = event => {
       const el = ref.current;
       if (!el?.contains(event.target) && event.which !== 3) {
-        options?.onClickOutside!(event);
+        onClickOutside?.(event);
       }
     };
 
     const handleKey = event => {
       if (event.keyCode === 27) {
-        options?.onEscape!(event);
+        onEscape?.(event);
       }
     };
 
-    if (options.onClickOutside) {
-      document.addEventListener('mousedown', handleClick);
-      document.addEventListener('touchstart', handleClick);
-    }
+    if (open) {
+      if (onClickOutside) {
+        document.addEventListener('mousedown', handleClick);
+        document.addEventListener('touchstart', handleClick);
+      }
 
-    if (handleKey) {
-      document.addEventListener('keydown', handleKey);
+      if (handleKey) {
+        document.addEventListener('keydown', handleKey);
+      }
     }
 
     return () => {
-      if (options.onClickOutside) {
+      if (onClickOutside) {
         document.removeEventListener('mousedown', handleClick);
         document.removeEventListener('touchstart', handleClick);
       }
@@ -42,5 +48,5 @@ export const useExitListener = (
         document.removeEventListener('keydown', handleKey);
       }
     };
-  }, [ref, options]);
+  }, [ref, onClickOutside, onEscape, open]);
 };

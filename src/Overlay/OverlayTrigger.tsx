@@ -2,18 +2,18 @@ import React, { useCallback, forwardRef, Ref, FC } from 'react';
 
 export type TriggerTypes = 'hover' | 'click' | 'contextmenu' | 'focus' | 'key';
 
-interface OverlayTriggerEvent {
+export interface OverlayTriggerEvent {
   type: TriggerTypes;
   nativeEvent: any;
 }
 
-interface OverlayTriggerProps {
+export interface OverlayTriggerProps {
   children?: any;
   className?: string;
   elementType?: any;
   trigger: TriggerTypes | TriggerTypes[];
-  onActivate: (event: OverlayTriggerEvent) => void;
-  onDeactivate: (event: OverlayTriggerEvent) => void;
+  onOpen?: (event: OverlayTriggerEvent) => void;
+  onClose?: (event: OverlayTriggerEvent) => void;
 }
 
 export const OverlayTrigger: FC<OverlayTriggerProps & {
@@ -25,9 +25,9 @@ export const OverlayTrigger: FC<OverlayTriggerProps & {
       className,
       elementType = 'span',
       trigger = ['click'],
-      onActivate,
-      onDeactivate
-    }: OverlayTriggerProps,
+      onOpen = () => undefined,
+      onClose = () => undefined
+    },
     ref
   ) => {
     const hasTrigger = useCallback(
@@ -44,59 +44,59 @@ export const OverlayTrigger: FC<OverlayTriggerProps & {
     const onFocus = useCallback(
       event => {
         if (hasTrigger('focus')) {
-          onActivate({ type: 'focus', nativeEvent: event });
+          onOpen({ type: 'focus', nativeEvent: event });
         }
       },
-      [onActivate, hasTrigger]
+      [onOpen, hasTrigger]
     );
 
     const onBlur = useCallback(
       event => {
         if (hasTrigger('focus')) {
-          onDeactivate({ type: 'focus', nativeEvent: event });
+          onClose({ type: 'focus', nativeEvent: event });
         }
       },
-      [onDeactivate, hasTrigger]
+      [onClose, hasTrigger]
     );
 
     const onMouseEnter = useCallback(
       event => {
         if (hasTrigger('hover')) {
-          onActivate({ type: 'hover', nativeEvent: event });
+          onOpen({ type: 'hover', nativeEvent: event });
         }
       },
-      [onActivate, hasTrigger]
+      [onOpen, hasTrigger]
     );
 
     const onMouseLeave = useCallback(
       event => {
         if (hasTrigger('hover')) {
-          onDeactivate({ type: 'hover', nativeEvent: event });
+          onClose({ type: 'hover', nativeEvent: event });
         }
       },
-      [onDeactivate, hasTrigger]
+      [onClose, hasTrigger]
     );
 
     const onClick = useCallback(
       event => {
         if (hasTrigger('click')) {
-          onActivate({ type: 'click', nativeEvent: event });
+          onOpen({ type: 'click', nativeEvent: event });
         }
 
         // Kill the tooltip on click if its not a click listener
         if (!hasTrigger('click')) {
-          onDeactivate({ type: 'hover', nativeEvent: event });
+          onClose({ type: 'hover', nativeEvent: event });
         }
       },
-      [onActivate, onDeactivate, hasTrigger]
+      [onOpen, onClose, hasTrigger]
     );
 
     const onContextMenu = useCallback(event => {
       if (hasTrigger('contextmenu')) {
         event.preventDefault();
-        onActivate({ type: 'contextmenu', nativeEvent: event });
+        onOpen({ type: 'contextmenu', nativeEvent: event });
       }
-    }, []);
+    }, [onOpen]);
 
     const tabIndex = hasTrigger('focus') ? -1 : undefined;
     const Component = elementType;

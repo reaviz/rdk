@@ -1,33 +1,67 @@
-import React, { FC } from 'react';
-import { useOverlayPortal } from './useOverlayPortal';
+import React, { FC, forwardRef, Ref, useImperativeHandle, useRef, useState } from 'react';
+import { useId } from '../../utils/useId';
+import { Portal } from '../../Portal';
+
+const portals: string[] = [];
+const START_INDEX = 990;
+
+export interface OverlayPortalRef {
+  ref?: Ref<HTMLElement>;
+}
 
 export interface OverlayPortalProps {
-  children?: any;
   appendToBody?: boolean;
-  render?: (props: {
-    zIndex: number;
-    portalIndex: number;
-    backdropIndex: number;
-  }) => void;
+  children: (props: {
+    overlayIndex: number | null;
+    portalIndex: number | null;
+    backdropIndex: number | null;
+  }) => any;
   onMount?: () => void;
   onUnmount?: () => void;
 }
 
-export const OverlayPortal: FC<OverlayPortalProps> = ({
-  render,
-  children,
-  ...rest
-}) => {
-  const {
-    OverlayPortal: Component,
-    overlayIndex,
-    portalIndex
-  } = useOverlayPortal(rest);
-  const renderer = children || render;
+export const OverlayPortal: FC<OverlayPortalProps & OverlayPortalRef> = forwardRef(
+  (
+    {
+      children,
+      onMount,
+      onUnmount,
+      appendToBody = true
+    },
+    ref
+  ) =>
+{
+  const id = useId();
+  const [portalIndex, setPortalIndex] = useState<number | null>(null);
+  const [overlayIndex, setOverlayIndex] = useState<number | null>(null);
+  const portalRef = useRef<any | null>(null);
+
+  useImperativeHandle(ref, () => portalRef.current);
 
   return (
-    <Component {...rest}>
-      {renderer({ overlayIndex, portalIndex, backdropIndex: overlayIndex })}
-    </Component>
-  );
-};
+    <Portal
+      ref={portalRef}
+      appendToBody={appendToBody}
+      onMount={() => {
+        portals.push(id);
+
+        let pidx = portals.indexOf(id);
+        if (pidx === -1) {
+          pidx = 0;
+        }
+
+        setPortalIndex(pidx);
+        setOverlayIndex(START_INDEX + pidx * 2 + 1);
+        onMount?.();
+      }}
+      onUnmount={() => {
+        onUnmount?.();
+        portals.splice(portals.indexOf(id), 1);
+        setPortalIndex(null);
+        setOverlayIndex(null);
+      }}
+    >
+      {children({ overlayIndex, portalIndex, backdropIndex: overlayIndex })}
+    </Portal>
+  )
+});

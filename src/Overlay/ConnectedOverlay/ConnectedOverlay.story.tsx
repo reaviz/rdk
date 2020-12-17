@@ -19,8 +19,8 @@ storiesOf('Utilities/Overlay/Connected Overlay', module)
       >
         <ConnectedOverlay
           open={visible}
-          onActivate={() => setVisible(true)}
-          onDeactivate={() => setVisible(false)}
+          onOpen={() => setVisible(true)}
+          onClose={() => setVisible(false)}
           content={() => (
             <div
               style={{
@@ -51,8 +51,8 @@ storiesOf('Utilities/Overlay/Connected Overlay', module)
       >
         <ConnectedOverlay
           open={visible}
-          onActivate={() => setVisible(true)}
-          onDeactivate={() => setVisible(false)}
+          onOpen={() => setVisible(true)}
+          onClose={() => setVisible(false)}
           content={() => (
             <div
               style={{
@@ -98,11 +98,11 @@ storiesOf('Utilities/Overlay/Connected Overlay', module)
               {content}
             </motion.div>
           )}
-          onActivate={() => {
+          onOpen={() => {
             clearTimeout(timeout.current);
             setOpen(true);
           }}
-          onDeactivate={() => {
+          onClose={() => {
             clearTimeout(timeout.current);
             timeout.current = setTimeout(() => setOpen(false), 100);
           }}
@@ -128,7 +128,7 @@ storiesOf('Utilities/Overlay/Connected Overlay', module)
     );
   })
   .add('Menu Example', () => {
-    const Menu = ({ children, open, reference, onDeactivate }) => (
+    const Menu = ({ children, open, reference, onClose }) => (
       <ConnectedOverlay
         trigger="click"
         placement="bottom-start"
@@ -149,7 +149,7 @@ storiesOf('Utilities/Overlay/Connected Overlay', module)
             {children}
           </motion.div>
         )}
-        onDeactivate={onDeactivate}
+        onClose={onClose}
       />
     );
 
@@ -175,7 +175,7 @@ storiesOf('Utilities/Overlay/Connected Overlay', module)
         <Menu
           reference={buttonRef}
           open={menuOpen}
-          onDeactivate={() => setMenuOpen(false)}
+          onClose={() => setMenuOpen(false)}
         >
           <ul>
             <li>One</li>
@@ -212,11 +212,11 @@ storiesOf('Utilities/Overlay/Connected Overlay', module)
               {content}
             </motion.div>
           )}
-          onActivate={() => {
+          onOpen={() => {
             clearTimeout(timeout.current);
             setOpen(true);
           }}
-          onDeactivate={() => {
+          onClose={() => {
             clearTimeout(timeout.current);
             timeout.current = setTimeout(() => setOpen(false), 100);
           }}

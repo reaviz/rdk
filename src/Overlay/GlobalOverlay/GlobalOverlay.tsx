@@ -1,31 +1,65 @@
-import React, { FC, useEffect } from 'react';
-import { GlobalOverlayCommon, useGlobalOverlay } from './useGlobalOverlay';
+import React, { FC, Fragment, useCallback, useRef } from 'react';
+import ScrollLock from 'react-scrolllock';
+import { OverlayContext } from '../OverlayContext';
+import { AnimatePresence } from 'framer-motion';
+import { OverlayPortal } from '../OverlayPortal';
+import { useExitListener } from '../../ExitListener';
+import { Backdrop } from '../../Backdrop';
 
-export interface GlobalOverlayProps extends GlobalOverlayCommon {
-  open: boolean;
+export interface GlobalOverlayProps {
   children?: any;
-  render?: (props: { overlayIndex: number }) => void;
+  open: boolean;
+  closeOnBackdropClick?: boolean;
+  hasBackdrop?: boolean;
+  backdropClassName?: string;
+  closeOnEscape?: boolean;
   onClose?: () => void;
 }
 
 export const GlobalOverlay: FC<GlobalOverlayProps> = ({
-  children,
-  render,
   open,
+  hasBackdrop = true,
+  closeOnEscape = true,
+  closeOnBackdropClick = true,
+  backdropClassName,
+  children,
   onClose = () => undefined,
-  ...rest
 }) => {
-  const {
-    GlobalOverlay: Component,
-    overlayIndex,
-    portalIndex,
-    setOpen,
-  } = useGlobalOverlay({ onClose, ...rest });
-  const renderFn = children || render;
+  const overlayRef = useRef<any | null>(null);
+  const onBackdropClick = useCallback(() => {
+    if (closeOnBackdropClick) {
+      onClose?.();
+    }
+  }, [closeOnBackdropClick]);
 
-  useEffect(() => {
-    setOpen(open);
-  }, [open]);
+  useExitListener({
+    ref: overlayRef,
+    open,
+    onEscape: () => closeOnEscape && onClose?.(),
+  });
 
-  return <Component>{() => renderFn({ overlayIndex, portalIndex })}</Component>;
+  return (
+    <OverlayContext.Provider value={{ close: () => onClose?.() }}>
+      <AnimatePresence>
+        {open && (
+          <OverlayPortal ref={overlayRef}>
+            {({ overlayIndex, portalIndex }) => (
+              <Fragment>
+                {hasBackdrop && (
+                  <Backdrop
+                    zIndex={overlayIndex as number}
+                    portalIndex={portalIndex as number}
+                    onClick={onBackdropClick}
+                    className={backdropClassName}
+                  />
+                )}
+                {children({ overlayIndex, portalIndex })}
+                <ScrollLock />
+              </Fragment>
+            )}
+          </OverlayPortal>
+        )}
+      </AnimatePresence>
+    </OverlayContext.Provider>
+  );
 };
