@@ -1,7 +1,7 @@
 import React, { FC, useImperativeHandle, forwardRef, Ref } from 'react';
 import classNames from 'classnames';
 import { usePosition, ReferenceProp, PositionOptions } from './usePosition';
-import css from './Position.module.scss';
+import css from './Position.module.css';
 
 export interface PositionProps extends PositionOptions {
   reference: ReferenceProp;

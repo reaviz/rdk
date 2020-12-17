@@ -1,0 +1,7 @@
+.container {
+  pointer-events: none;
+}
+
+.container > * {
+  pointer-events: initial;
+}

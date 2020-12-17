@@ -1,7 +1,7 @@
 import React, { FC, MouseEvent } from 'react';
 import classNames from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
-import css from './Backdrop.module.scss';
+import css from './Backdrop.module.css';
 
 interface BackdropProps {
   visible: boolean;
