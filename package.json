@@ -1,6 +1,6 @@
 {
   "name": "rdk",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "React Component Developer Kit",
   "scripts": {
     "start": "start-storybook",
@@ -33,13 +33,13 @@
   "homepage": "https://github.com/reaviz/rdk#readme",
   "dependencies": {
     "classnames": "^2.2.6",
-    "framer-motion": "^3.0.0",
     "popper.js": "^1.16.1",
     "react-scrolllock": "^5.0.1"
   },
   "peerDependencies": {
     "react": ">=16",
-    "react-dom": ">=16"
+    "react-dom": ">=16",
+    "framer-motion": "^3.0.0"
   },
   "storybook-deployer": {
     "gitUsername": "amcdnl",
