@@ -165,7 +165,14 @@ const Dialog = ({ visible, header, children, onClose }) => (
         style={{
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: overlayIndex,
+          position: 'fixed',
+          pointerEvents: 'none'
         }}
       >
         <motion.div
@@ -174,12 +181,11 @@ const Dialog = ({ visible, header, children, onClose }) => (
           exit={{ opacity: 0, y: '20%' }}
           transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
           style={{
-            zIndex: overlayIndex,
             width: 300,
             top: 50,
             background: 'black',
-            position: 'fixed',
-            padding: 20
+            padding: 20,
+            pointerEvents: 'auto'
           }}
         >
           <h1>
