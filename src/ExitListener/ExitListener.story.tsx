@@ -3,11 +3,12 @@ import { storiesOf } from '@storybook/react';
 import { useExitListener } from './useExitListener';
 import { useRef, useState } from '@storybook/addons';
 
-storiesOf('Utilities/Exit Listener', module).add('Simple', () => {
+storiesOf('Examples/Exit Listener', module).add('Simple', () => {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
-  useExitListener(ref, {
+  useExitListener({
+    ref,
     onClickOutside: () => setVisible(false),
     onEscape: () => setVisible(false)
   });

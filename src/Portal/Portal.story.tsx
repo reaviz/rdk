@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Portal } from './Portal';
 
-storiesOf('Utilities/Portal', module)
+storiesOf('Examples/Portal', module)
   .add('Element', () => (
     <div
       style={{

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { useRef } from '@storybook/addons';
 import { usePosition } from './usePosition';
 
-storiesOf('Utilities/Position', module)
+storiesOf('Examples/Position', module)
   .add('Simple', () => {
     const anchorRef = useRef<HTMLDivElement | null>(null);
     const [positionRef] = usePosition(anchorRef, { placement: 'bottom' });

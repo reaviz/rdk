@@ -4,7 +4,7 @@ import { useState, useRef } from '@storybook/addons';
 import { ConnectedOverlay } from './ConnectedOverlay';
 import { motion } from 'framer-motion';
 
-storiesOf('Utilities/Overlay/Connected Overlay', module)
+storiesOf('Examples/Overlay/Connected Overlay', module)
   .add('Simple', () => {
     const [visible, setVisible] = useState(false);
 

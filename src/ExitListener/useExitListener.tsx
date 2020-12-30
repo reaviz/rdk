@@ -2,14 +2,14 @@ import { RefObject, useLayoutEffect } from 'react';
 
 interface ExitListenerOptions {
   ref: RefObject<HTMLElement | null>;
-  open: boolean;
+  open?: boolean;
   onClickOutside?: (event: MouseEvent) => void;
   onEscape?: (event: KeyboardEvent) => void;
 }
 
 export const useExitListener = ({
   ref,
-  open,
+  open = true,
   onClickOutside,
   onEscape
 }: ExitListenerOptions) => {
