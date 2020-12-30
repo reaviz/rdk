@@ -1,162 +1,166 @@
-import React, { Fragment } from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { Fragment, useState } from 'react';
 import { GlobalOverlay } from './GlobalOverlay';
-import { useState } from '@storybook/addons';
 import { motion } from 'framer-motion';
 import { useOverlay } from '../useOverlay';
 
-storiesOf('Examples/Overlay/Global Overlay', module)
-  .add('Auto Open', () => {
-    const [open, setOpen] = useState(true);
+export default {
+  title: 'Examples/Overlay/Global Overlay',
+  component: GlobalOverlay
+};
 
-    return (
+export const AutoOpen = () => {
+  const [open, setOpen] = useState(true);
+
+  return (
+    <div
+      style={{
+        width: 300,
+        height: 300
+      }}
+    >
       <div
         style={{
           width: 300,
-          height: 300
+          height: 300,
+          border: 'solid 1px blue',
+          padding: 50,
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <div
-          style={{
-            width: 300,
-            height: 300,
-            border: 'solid 1px blue',
-            padding: 50,
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-        >
-          Hello
-          <GlobalOverlay open={open} onClose={() => setOpen(false)}>
-            {({ overlayIndex }) => (
-              <div
-                style={{
-                  background: 'blue',
-                  zIndex: overlayIndex,
-                  position: 'absolute',
-                  width: 500,
-                  height: 300
-                }}
-              >
-                Hi - {overlayIndex}
-              </div>
-            )}
-          </GlobalOverlay>
-        </div>
+        Hello
+        <GlobalOverlay open={open} onClose={() => setOpen(false)}>
+          {({ overlayIndex }) => (
+            <div
+              style={{
+                background: 'blue',
+                zIndex: overlayIndex,
+                position: 'absolute',
+                width: 500,
+                height: 300
+              }}
+            >
+              Hi - {overlayIndex}
+            </div>
+          )}
+        </GlobalOverlay>
       </div>
-    );
-  })
-  .add('Click to open', () => {
-    const [open, setOpen] = useState(false);
+    </div>
+  );
+};
 
-    return (
+export const ClickToOpen = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      style={{
+        width: 300,
+        height: 300
+      }}
+    >
       <div
         style={{
           width: 300,
-          height: 300
+          height: 300,
+          background: 'black',
+          padding: 50,
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <div
-          style={{
-            width: 300,
-            height: 300,
-            background: 'black',
-            padding: 50,
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-        >
-          <button type="button" onClick={() => setOpen(true)}>
-            Open
-          </button>
-          <GlobalOverlay
-            open={open}
-            closeOnBackdropClick={true}
-            onClose={() => setOpen(false)}
-          >
-            {({ overlayIndex }) => (
-              <div
-                style={{
-                  background: 'blue',
-                  zIndex: overlayIndex,
-                  position: 'absolute',
-                  width: 500,
-                  height: 300
-                }}
-              >
-                Hi - {overlayIndex}
-              </div>
-            )}
-          </GlobalOverlay>
-        </div>
-      </div>
-    );
-  })
-  .add('Prompt to close', () => {
-    const [open, setOpen] = useState(false);
-
-    return (
-      <div
-        style={{
-          width: 300,
-          height: 300
-        }}
-      >
-        <div
-          style={{
-            width: 300,
-            height: 300,
-            background: 'black',
-            padding: 50,
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-        >
-          <button type="button" onClick={() => setOpen(true)}>
-            Open
-          </button>
-          <GlobalOverlay
-            open={open}
-            closeOnBackdropClick={true}
-            onClose={() => {
-              const ok = window.confirm('Are you sure you want to close?');
-              if (ok) {
-                setOpen(false);
-              }
-            }}
-          >
-            {({ overlayIndex }) => (
-              <div
-                style={{
-                  background: 'blue',
-                  zIndex: overlayIndex,
-                  position: 'absolute',
-                  width: 500,
-                  height: 300
-                }}
-              >
-                Hi - {overlayIndex}
-              </div>
-            )}
-          </GlobalOverlay>
-        </div>
-      </div>
-    );
-  })
-  .add('Dialog Example', () => {
-    const [open, setOpen] = useState(false);
-    return (
-      <Fragment>
         <button type="button" onClick={() => setOpen(true)}>
           Open
         </button>
-        <Dialog visible={open} header="Welcome!" onClose={() => setOpen(false)}>
-          <MyDialog />
-        </Dialog>
-      </Fragment>
-    );
-  });
+        <GlobalOverlay
+          open={open}
+          closeOnBackdropClick={true}
+          onClose={() => setOpen(false)}
+        >
+          {({ overlayIndex }) => (
+            <div
+              style={{
+                background: 'blue',
+                zIndex: overlayIndex,
+                position: 'absolute',
+                width: 500,
+                height: 300
+              }}
+            >
+              Hi - {overlayIndex}
+            </div>
+          )}
+        </GlobalOverlay>
+      </div>
+    </div>
+  );
+};
 
+export const PromptToClose = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      style={{
+        width: 300,
+        height: 300
+      }}
+    >
+      <div
+        style={{
+          width: 300,
+          height: 300,
+          background: 'black',
+          padding: 50,
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        <button type="button" onClick={() => setOpen(true)}>
+          Open
+        </button>
+        <GlobalOverlay
+          open={open}
+          closeOnBackdropClick={true}
+          onClose={() => {
+            const ok = window.confirm('Are you sure you want to close?');
+            if (ok) {
+              setOpen(false);
+            }
+          }}
+        >
+          {({ overlayIndex }) => (
+            <div
+              style={{
+                background: 'blue',
+                zIndex: overlayIndex,
+                position: 'absolute',
+                width: 500,
+                height: 300
+              }}
+            >
+              Hi - {overlayIndex}
+            </div>
+          )}
+        </GlobalOverlay>
+      </div>
+    </div>
+  );
+};
+
+export const DialogExample = () => {
+  const [open, setOpen] = useState(false);
+  return (
+    <Fragment>
+      <button type="button" onClick={() => setOpen(true)}>
+        Open
+      </button>
+      <Dialog visible={open} header="Welcome!" onClose={() => setOpen(false)}>
+        <MyDialog />
+      </Dialog>
+    </Fragment>
+  );
+};
 
 const Dialog = ({ visible, header, children, onClose }) => (
   <GlobalOverlay open={visible} onClose={onClose}>

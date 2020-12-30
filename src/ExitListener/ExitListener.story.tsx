@@ -1,9 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { useExitListener } from './useExitListener';
 import { useRef, useState } from '@storybook/addons';
 
-storiesOf('Examples/Exit Listener', module).add('Simple', () => {
+export default {
+  title: 'Examples/Exit Listener'
+};
+
+export const Simpe = () => {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -26,4 +29,4 @@ storiesOf('Examples/Exit Listener', module).add('Simple', () => {
       </div>
     </div>
   );
-});
+};

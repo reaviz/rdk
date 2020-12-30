@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import css from './Backdrop.module.css';
 
-interface BackdropProps {
+export interface BackdropProps {
   zIndex?: number;
   portalIndex?: number;
   className?: string;
