@@ -16,6 +16,12 @@ export interface OverlayPortalRef {
   ref?: Ref<HTMLElement>;
 }
 
+export interface OverlayPortalMountEvent {
+  overlayIndex: number;
+  portalIndex: number;
+  backdropIndex: number;
+}
+
 export interface OverlayPortalProps {
   appendToBody?: boolean;
   className?: string;
@@ -24,7 +30,7 @@ export interface OverlayPortalProps {
     portalIndex: number | null;
     backdropIndex: number | null;
   }) => any;
-  onMount?: () => void;
+  onMount?: (event: OverlayPortalMountEvent) => void;
   onUnmount?: () => void;
 }
 
@@ -53,8 +59,14 @@ export const OverlayPortal: FC<
           }
 
           setPortalIndex(pidx);
-          setOverlayIndex(START_INDEX + pidx * 2 + 1);
-          onMount?.();
+          const overlayIdx = START_INDEX + pidx * 2 + 1;
+          setOverlayIndex(overlayIdx);
+
+          onMount?.({
+            overlayIndex: overlayIdx,
+            portalIndex: pidx,
+            backdropIndex: overlayIdx
+          });
         }}
         onUnmount={() => {
           onUnmount?.();
