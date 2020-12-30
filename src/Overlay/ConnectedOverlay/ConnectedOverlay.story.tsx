@@ -23,14 +23,14 @@ export const Simple = () => {
         open={visible}
         onOpen={() => setVisible(true)}
         onClose={() => setVisible(false)}
-        content={() => (
+        content={({ overlayIndex }) => (
           <div
             style={{
-              background: 'black',
+              background: 'green',
               padding: 15
             }}
           >
-            <h1>Hello</h1>
+            <h1>Hello + {overlayIndex}</h1>
           </div>
         )}
       >

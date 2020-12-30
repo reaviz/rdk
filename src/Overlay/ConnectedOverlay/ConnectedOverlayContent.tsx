@@ -3,7 +3,9 @@ import React, {
   forwardRef,
   Ref,
   useImperativeHandle,
-  RefObject
+  RefObject,
+  useEffect,
+  useState
 } from 'react';
 import { useExitListener } from '../../ExitListener';
 import { Placement, usePosition } from '../../Position';
@@ -48,6 +50,7 @@ export const ConnectedOverlayContent: FC<
     },
     ref
   ) => {
+    const [overlayIndex, setOverlayIndex] = useState<number | null>(null);
     const [positionRef, popperRef] = usePosition(triggerRef, {
       followCursor,
       modifiers,
@@ -80,12 +83,20 @@ export const ConnectedOverlayContent: FC<
       onEscape: () => closeOnEscape && onClose?.()
     });
 
+    useEffect(() => {
+      if (positionRef && overlayIndex) {
+        positionRef.current.style.zIndex = overlayIndex;
+      }
+    }, [positionRef.current, overlayIndex]);
+
     return (
       <OverlayPortal
         ref={positionRef}
         className={portalClassName}
         elementType={elementType}
         appendToBody={appendToBody}
+        onMount={(event) => setOverlayIndex(event.overlayIndex)}
+        onUnmount={() => setOverlayIndex(null)}
       >
         {children}
       </OverlayPortal>
