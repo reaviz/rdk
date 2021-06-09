@@ -38,7 +38,7 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
 
     useEffect(() => {
       if (className) {
-        elementRef.current.setAttribute('class', className);
+        elementRef.current.setAttribute('class', `${className} rdk-portal`);
       }
     }, [className]);
 
@@ -53,6 +53,7 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
 
     if (!mounted.current) {
       mounted.current = true;
+      elementRef.current.classList.add('rdk-portal');
       document.body.appendChild(elementRef.current);
     }
 
