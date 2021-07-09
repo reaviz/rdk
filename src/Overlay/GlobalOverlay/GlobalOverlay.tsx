@@ -23,19 +23,19 @@ export const GlobalOverlay: FC<GlobalOverlayProps> = ({
   closeOnBackdropClick = true,
   backdropClassName,
   children,
-  onClose = () => undefined,
+  onClose
 }) => {
   const overlayRef = useRef<any | null>(null);
   const onBackdropClick = useCallback(() => {
     if (closeOnBackdropClick) {
       onClose?.();
     }
-  }, [closeOnBackdropClick]);
+  }, [closeOnBackdropClick, onClose]);
 
   useExitListener({
     ref: overlayRef,
     open,
-    onEscape: () => closeOnEscape && onClose?.(),
+    onEscape: () => closeOnEscape && onClose?.()
   });
 
   return (
