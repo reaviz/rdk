@@ -6,7 +6,7 @@ export default {
   title: 'Examples/Exit Listener'
 };
 
-export const Simpe = () => {
+export const Simple = () => {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
