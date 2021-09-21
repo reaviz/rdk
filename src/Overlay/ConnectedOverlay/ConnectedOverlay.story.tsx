@@ -125,8 +125,14 @@ export const TooltipExample = () => {
         border: 'solid 1px red'
       }}
     >
-      <Tooltip content="Hello">
-        <span style={{ padding: 10, background: 'blue' }}>Hi!</span>
+      <Tooltip content="Hello 1">
+        <span style={{ padding: 10, background: 'blue' }}>Hover Me</span>
+      </Tooltip>
+      <br />
+      <br />
+      <br />
+      <Tooltip content="Hello 2">
+        <span style={{ padding: 10, background: 'blue' }}>Hover Me Too</span>
       </Tooltip>
     </div>
   );
