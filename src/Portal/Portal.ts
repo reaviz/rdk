@@ -48,7 +48,11 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
 
     useUnmount(() => {
       onUnmount?.();
-      document.body.removeChild(elementRef.current);
+
+      // Reference: https://medium.com/trabe/reusable-react-portals-17dead20232b
+      window.requestAnimationFrame(() => {
+        document.body.removeChild(elementRef.current);
+      });
     });
 
     if (!mounted.current) {
