@@ -8,6 +8,7 @@ import {
   useEffect
 } from 'react';
 import { createPortal } from 'react-dom';
+import { useUnmount } from '../utils/useUnmount';
 
 export interface PortalProps {
   element?: string;
@@ -15,12 +16,6 @@ export interface PortalProps {
   onMount?: () => void;
   onUnmount?: () => void;
 }
-
-const useUnmount = (fn) => {
-  const fnRef = useRef(fn);
-  fnRef.current = fn;
-  useLayoutEffect(() => () => fnRef.current(), []);
-};
 
 export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
   (
