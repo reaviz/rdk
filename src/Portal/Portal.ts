@@ -28,16 +28,18 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
     },
     ref
   ) => {
-    const elementRef = useRef<HTMLElement>(document.createElement(element));
+    const elementRef = useRef<HTMLElement | null>(null);
     const mounted = useRef<boolean>(false);
 
     useEffect(() => {
-      if (className) {
+      if (className && elementRef.current) {
         elementRef.current.setAttribute('class', `${className} rdk-portal`);
       }
-    }, [className]);
+    }, [className, elementRef.current]);
 
     useLayoutEffect(() => {
+      // Create ref to created element once, on mount
+      elementRef.current = document.createElement(element);
       onMount?.();
     }, []);
 
@@ -46,9 +48,17 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
 
       // Reference: https://medium.com/trabe/reusable-react-portals-17dead20232b
       window.requestAnimationFrame(() => {
-        document.body.removeChild(elementRef.current);
+        if (elementRef.current) {
+          document.body.removeChild(elementRef.current);
+        }
       });
     });
+
+    useImperativeHandle(ref, () => elementRef.current!);
+
+    if (!elementRef.current) {
+      return null;
+    }
 
     if (!mounted.current) {
       mounted.current = true;
@@ -57,9 +67,6 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
     }
 
     const portal = createPortal(children, elementRef.current);
-
-    useImperativeHandle(ref, () => elementRef.current);
-
     return portal;
   }
 );
