@@ -60,3 +60,9 @@ If you want to run RDK locally, its super easy!
 - `yarn install`
 - `yarn start`
 - Browser opens to Storybook page
+
+## ❤️ Contributors
+
+Thanks to all our contributors!
+
+<a href="https://github.com/reaviz/rdk/graphs/contributors"><img src="https://opencollective.com/reaviz/contributors.svg?width=890" /></a>
