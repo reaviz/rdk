@@ -1,5 +1,7 @@
-<p align="center">
-  <h1>🛠 RDK - Component ToolKit</h1>
+<div align="center">
+  <h1>🛠 RDK</h1>
+  Component ToolKit for React
+  <br />
   <a href="https://github.com/reaviz/rdk/workflows/build/">
     <img src="https://github.com/reaviz/rdk/workflows/build/badge.svg?branch=master" />
   </a>
@@ -21,7 +23,7 @@
   <a href="https://opencollective.com/reaviz">
     <img alt="Open Collective backers and sponsors" src="https://img.shields.io/opencollective/all/reaviz?label=backers">
   </a>
-</p>
+</div>
 
 ---
 
