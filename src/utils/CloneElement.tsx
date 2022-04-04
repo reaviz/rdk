@@ -19,7 +19,7 @@ export function CloneElement<T = any>({
   ...rest
 }: CloneElementProps & Partial<T>) {
   const getProjectedProps = useMemo(
-    () => (props) => {
+    () => props => {
       const childProps = element.props;
 
       return Object.keys(props).reduce((acc, key) => {
@@ -49,7 +49,7 @@ export function CloneElement<T = any>({
 
   // Tricky logic around functional vs class components
   const ref = childRef
-    ? (node) => {
+    ? node => {
         if (typeof childRef === 'function') {
           childRef(node);
         } else if (ref) {

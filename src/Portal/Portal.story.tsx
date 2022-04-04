@@ -12,7 +12,7 @@ export const Simple = () => {
 
   function remount() {
     setTimeout(() => {
-      console.log('mounting', show)
+      console.log('mounting', show);
       setShow(s => !s);
       countRef.current++;
 

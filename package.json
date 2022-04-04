@@ -1,6 +1,6 @@
 {
   "name": "rdk",
-  "version": "5.1.6",
+  "version": "6.0.0",
   "description": "React Component Developer Kit",
   "scripts": {
     "start": "start-storybook",
@@ -37,7 +37,7 @@
     "react-scrolllock": "^5.0.1"
   },
   "peerDependencies": {
-    "framer-motion": "^3.0.0",
+    "framer-motion": "^6.0.0",
     "react": ">=16",
     "react-dom": ">=16"
   },
@@ -48,24 +48,24 @@
   },
   "devDependencies": {
     "@mdx-js/react": "1.6.22",
-    "@storybook/addon-docs": "6.3.8",
-    "@storybook/addon-knobs": "6.3.1",
-    "@storybook/addons": "6.3.8",
-    "@storybook/react": "6.3.8",
-    "@storybook/storybook-deployer": "^2.8.10",
+    "@storybook/addon-docs": "6.4.20",
+    "@storybook/addon-knobs": "6.4.0",
+    "@storybook/addons": "6.4.20",
+    "@storybook/react": "6.4.20",
+    "@storybook/storybook-deployer": "^2.8.11",
     "@types/classnames": "^2.3.1",
-    "@types/react": "^17.0.20",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
     "autoprefixer": "^9.8.5",
-    "chromatic": "^5.9.2",
-    "framer-motion": "^4.1.17",
+    "chromatic": "^6.5.3",
+    "framer-motion": "^6.2.8",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.4",
     "postcss-focus-visible": "^5.0.0",
     "prettier": "^2.1.2",
-    "react": "^17.0.2",
+    "react": "^18.0.0",
     "react-docgen-typescript-loader": "^3.7.2",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.0.0",
     "rollup": "^2.28.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
@@ -82,6 +82,15 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "printWidth": 80
   },
   "husky": {
     "hooks": {

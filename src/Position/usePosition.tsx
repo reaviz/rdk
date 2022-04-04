@@ -114,7 +114,7 @@ export const usePosition = (
           window.removeEventListener('mousemove', onMouseMove);
         }
       }
-    }
+    };
   }, [elementRef.current]);
 
   useLayoutEffect(() => {

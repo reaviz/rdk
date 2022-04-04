@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { ConnectedOverlay } from './ConnectedOverlay';
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion/dist/framer-motion';
 
 export default {
   title: 'Examples/Overlay/Connected Overlay',
@@ -247,13 +247,15 @@ export const ContextMenuExample = () => {
         border: 'solid 1px red'
       }}
     >
-      <ContextMenu content={
-        <ul>
-          <li>Foo</li>
-          <li>Bar</li>
-          <li>Baz</li>
-        </ul>
-      }>
+      <ContextMenu
+        content={
+          <ul>
+            <li>Foo</li>
+            <li>Bar</li>
+            <li>Baz</li>
+          </ul>
+        }
+      >
         <span style={{ padding: 10, background: 'blue' }}>Hi!</span>
       </ContextMenu>
     </div>

@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { TriggerTypes, OverlayTrigger } from '../OverlayTrigger';
 import { Placement, ReferenceProp } from '../../Position';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion/dist/framer-motion';
 import { OverlayContext } from '../../Overlay/OverlayContext';
 import {
   ConnectedOverlayContent,

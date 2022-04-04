@@ -66,7 +66,7 @@ export const ConnectedOverlayContent: FC<
     useExitListener({
       open: true,
       ref: positionRef,
-      onClickOutside: (event) => {
+      onClickOutside: event => {
         if (closeOnBodyClick) {
           let ref: HTMLElement | null = null;
           if ((triggerRef as RefObject<HTMLElement>).current) {
@@ -95,7 +95,7 @@ export const ConnectedOverlayContent: FC<
         className={portalClassName}
         elementType={elementType}
         appendToBody={appendToBody}
-        onMount={(event) => setOverlayIndex(event.overlayIndex)}
+        onMount={event => setOverlayIndex(event.overlayIndex)}
         onUnmount={() => setOverlayIndex(null)}
       >
         {children}

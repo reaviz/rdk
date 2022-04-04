@@ -16,9 +16,11 @@ export interface OverlayTriggerProps {
   onClose?: (event: OverlayTriggerEvent) => void;
 }
 
-export const OverlayTrigger: FC<OverlayTriggerProps & {
-  ref: Ref<HTMLSpanElement>;
-}> = forwardRef(
+export const OverlayTrigger: FC<
+  OverlayTriggerProps & {
+    ref: Ref<HTMLSpanElement>;
+  }
+> = forwardRef(
   (
     {
       children,
@@ -91,12 +93,15 @@ export const OverlayTrigger: FC<OverlayTriggerProps & {
       [onOpen, onClose, hasTrigger]
     );
 
-    const onContextMenu = useCallback(event => {
-      if (hasTrigger('contextmenu')) {
-        event.preventDefault();
-        onOpen({ type: 'contextmenu', nativeEvent: event });
-      }
-    }, [onOpen]);
+    const onContextMenu = useCallback(
+      event => {
+        if (hasTrigger('contextmenu')) {
+          event.preventDefault();
+          onOpen({ type: 'contextmenu', nativeEvent: event });
+        }
+      },
+      [onOpen]
+    );
 
     const tabIndex = hasTrigger('focus') ? -1 : undefined;
     const Component = elementType;

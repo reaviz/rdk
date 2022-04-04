@@ -1,6 +1,6 @@
-export const backdrop: string
+export const backdrop: string;
 interface Namespace {
-	"backdrop": string,
+  backdrop: string;
 }
-declare const backdropModule: Namespace
-export default backdropModule
+declare const backdropModule: Namespace;
+export default backdropModule;
