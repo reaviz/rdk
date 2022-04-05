@@ -1,7 +1,7 @@
 import React, { FC, Fragment, useCallback, useRef } from 'react';
 import ScrollLock from 'react-scrolllock';
 import { OverlayContext } from '../OverlayContext';
-import { AnimatePresence } from 'framer-motion/dist/framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { OverlayPortal } from '../OverlayPortal';
 import { useExitListener } from '../../ExitListener';
 import { Backdrop } from '../../Backdrop';

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { ConnectedOverlay } from './ConnectedOverlay';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 
 export default {
   title: 'Examples/Overlay/Connected Overlay',
