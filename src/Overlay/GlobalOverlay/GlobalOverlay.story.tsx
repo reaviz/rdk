@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { GlobalOverlay } from './GlobalOverlay';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import { useOverlay } from '../useOverlay';
 
 export default {
