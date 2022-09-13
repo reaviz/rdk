@@ -16,7 +16,11 @@ export const useExitListener = ({
   useLayoutEffect(() => {
     const handleClick = event => {
       const el = ref.current;
-      if (!el?.contains(event.target) && event.which !== 3) {
+      if (
+        !el?.contains(event.target) &&
+        !event.target.closest('rdk-portal') &&
+        event.which !== 3
+      ) {
         onClickOutside?.(event);
       }
     };
