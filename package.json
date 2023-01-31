@@ -1,6 +1,6 @@
 {
   "name": "rdk",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "description": "React Component Developer Kit",
   "scripts": {
     "start": "start-storybook",
@@ -33,7 +33,7 @@
   "homepage": "https://github.com/reaviz/rdk#readme",
   "dependencies": {
     "classnames": "^2.3.1",
-    "framer-motion": "^8.4.5",
+    "framer-motion": "7.8.0",
     "popper.js": "^1.16.1",
     "react-scrolllock": "^5.0.1"
   },
