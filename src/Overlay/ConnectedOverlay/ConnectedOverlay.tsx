@@ -153,10 +153,14 @@ export const ConnectedOverlay: FC<
         } else {
           onOpen?.();
         }
-      } else {
-        mounted.current = true;
       }
     }, [open]);
+
+    useEffect(() => {
+      if (!mounted.current) {
+        mounted.current = true;
+      }
+    });
 
     return (
       <OverlayContext.Provider value={{ close: () => onClose?.() }}>
