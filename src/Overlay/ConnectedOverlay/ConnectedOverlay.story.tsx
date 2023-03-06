@@ -73,97 +73,95 @@ export const DefaultOpen = () => {
   );
 };
 
-export const TooltipExample = () => {
-  const Tooltip = ({ children, content }) => {
-    const timeout = React.useRef<any>();
-    const [open, setOpen] = React.useState(false);
-
-    return (
-      <ConnectedOverlay
-        trigger="hover"
-        placement="top"
-        style={{
-          pointerEvents: 'none'
-        }}
-        open={open}
-        content={() => (
-          <motion.div
-            style={{
-              padding: 5,
-              background: 'rgba(0, 0, 0, .5)',
-              color: 'white',
-              textAlign: 'center',
-              borderRadius: 5
-            }}
-            initial={{ opacity: 0, scale: 0.3 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.3 }}
-          >
-            {content}
-          </motion.div>
-        )}
-        onOpen={() => {
-          clearTimeout(timeout.current);
-          setOpen(true);
-        }}
-        onClose={() => {
-          clearTimeout(timeout.current);
-          timeout.current = setTimeout(() => setOpen(false), 100);
-        }}
-      >
-        {children}
-      </ConnectedOverlay>
-    );
-  };
+const Tooltip = ({ children, content }) => {
+  const timeout = React.useRef<any>();
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <div
-      style={{
-        width: 300,
-        padding: 50,
-        height: 300,
-        border: 'solid 1px red'
-      }}
-    >
-      <Tooltip content="Hello 1">
-        <span style={{ padding: 10, background: 'blue' }}>Hover Me</span>
-      </Tooltip>
-      <br />
-      <br />
-      <br />
-      <Tooltip content="Hello 2">
-        <span style={{ padding: 10, background: 'blue' }}>Hover Me Too</span>
-      </Tooltip>
-    </div>
-  );
-};
-
-export const MenuExample = () => {
-  const Menu = ({ children, open, reference, onClose }) => (
     <ConnectedOverlay
-      trigger="click"
-      placement="bottom-start"
-      reference={reference}
+      trigger="hover"
+      placement="top"
+      style={{
+        pointerEvents: 'none'
+      }}
       open={open}
       content={() => (
         <motion.div
           style={{
-            padding: '5px 20px 5px 0',
+            padding: 5,
             background: 'rgba(0, 0, 0, .5)',
             color: 'white',
+            textAlign: 'center',
             borderRadius: 5
           }}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, scale: 0.3 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.3 }}
         >
-          {children}
+          {content}
         </motion.div>
       )}
-      onClose={onClose}
-    />
+      onOpen={() => {
+        clearTimeout(timeout.current);
+        setOpen(true);
+      }}
+      onClose={() => {
+        clearTimeout(timeout.current);
+        timeout.current = setTimeout(() => setOpen(false), 100);
+      }}
+    >
+      {children}
+    </ConnectedOverlay>
   );
+};
 
+export const TooltipExample = () => (
+  <div
+    style={{
+      width: 300,
+      padding: 50,
+      height: 300,
+      border: 'solid 1px red'
+    }}
+  >
+    <Tooltip content="Hello 1">
+      <span style={{ padding: 10, background: 'blue' }}>Hover Me</span>
+    </Tooltip>
+    <br />
+    <br />
+    <br />
+    <Tooltip content="Hello 2">
+      <span style={{ padding: 10, background: 'blue' }}>Hover Me Too</span>
+    </Tooltip>
+  </div>
+);
+
+const Menu = ({ children, open, reference, onClose }) => (
+  <ConnectedOverlay
+    trigger="click"
+    placement="bottom-start"
+    reference={reference}
+    open={open}
+    content={() => (
+      <motion.div
+        style={{
+          padding: '5px 20px 5px 0',
+          background: 'rgba(0, 0, 0, .5)',
+          color: 'white',
+          borderRadius: 5
+        }}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+      >
+        {children}
+      </motion.div>
+    )}
+    onClose={onClose}
+  />
+);
+
+export const MenuExample = () => {
   const buttonRef = useRef<any>(null);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
@@ -198,66 +196,64 @@ export const MenuExample = () => {
   );
 };
 
-export const ContextMenuExample = () => {
-  const ContextMenu = ({ children, content }) => {
-    const timeout = React.useRef<any>();
-    const [open, setOpen] = React.useState(false);
-
-    return (
-      <ConnectedOverlay
-        trigger="contextmenu"
-        placement="bottom"
-        triggerElement="div"
-        open={open}
-        content={() => (
-          <motion.div
-            style={{
-              padding: 5,
-              background: 'rgba(0, 0, 0, .5)',
-              color: 'white',
-              borderRadius: 5
-            }}
-            initial={{ opacity: 0, y: -25 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -25 }}
-          >
-            {content}
-          </motion.div>
-        )}
-        onOpen={() => {
-          clearTimeout(timeout.current);
-          setOpen(true);
-        }}
-        onClose={() => {
-          clearTimeout(timeout.current);
-          timeout.current = setTimeout(() => setOpen(false), 100);
-        }}
-      >
-        {children}
-      </ConnectedOverlay>
-    );
-  };
+const ContextMenu = ({ children, content }) => {
+  const timeout = React.useRef<any>();
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <div
-      style={{
-        width: 300,
-        padding: 50,
-        height: 300,
-        border: 'solid 1px red'
+    <ConnectedOverlay
+      trigger="contextmenu"
+      placement="bottom"
+      triggerElement="div"
+      open={open}
+      content={() => (
+        <motion.div
+          style={{
+            padding: 5,
+            background: 'rgba(0, 0, 0, .5)',
+            color: 'white',
+            borderRadius: 5
+          }}
+          initial={{ opacity: 0, y: -25 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -25 }}
+        >
+          {content}
+        </motion.div>
+      )}
+      onOpen={() => {
+        clearTimeout(timeout.current);
+        setOpen(true);
+      }}
+      onClose={() => {
+        clearTimeout(timeout.current);
+        timeout.current = setTimeout(() => setOpen(false), 100);
       }}
     >
-      <ContextMenu
-        content={
-          <ul>
-            <li>Foo</li>
-            <li>Bar</li>
-            <li>Baz</li>
-          </ul>
-        }
-      >
-        <span style={{ padding: 10, background: 'blue' }}>Hi!</span>
-      </ContextMenu>
-    </div>
+      {children}
+    </ConnectedOverlay>
   );
 };
+
+export const ContextMenuExample = () => (
+  <div
+    style={{
+      width: 300,
+      padding: 50,
+      height: 300,
+      border: 'solid 1px red'
+    }}
+  >
+    <ContextMenu
+      content={
+        <ul>
+          <li>Foo</li>
+          <li>Bar</li>
+          <li>Baz</li>
+        </ul>
+      }
+    >
+      <span style={{ padding: 10, background: 'blue' }}>Hi!</span>
+    </ContextMenu>
+  </div>
+);
