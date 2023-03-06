@@ -1,10 +1,10 @@
 {
   "name": "rdk",
-  "version": "6.4.0",
+  "version": "6.4.1",
   "description": "React Component Developer Kit",
   "scripts": {
-    "start": "start-storybook",
-    "build-storybook": "build-storybook",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 9009",
+    "build-storybook": "export NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
     "storybook:ci": "storybook-to-ghpages --existing-output-dir=storybook-static --ci",
     "prettier": "prettier --loglevel warn --write 'src/**/*.{ts,tsx,js,jsx}'",
     "build": "rollup -c",
