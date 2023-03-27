@@ -32,10 +32,10 @@
   },
   "homepage": "https://github.com/reaviz/rdk#readme",
   "dependencies": {
+    "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.1",
     "framer-motion": "7.8.0",
-    "popper.js": "^1.16.1",
-    "react-scrolllock": "^5.0.1"
+    "popper.js": "^1.16.1"
   },
   "peerDependencies": {
     "react": ">=16",
