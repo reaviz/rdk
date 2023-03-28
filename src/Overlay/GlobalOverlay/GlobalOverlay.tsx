@@ -1,5 +1,5 @@
-import React, { FC, Fragment, useCallback, useRef } from 'react';
-import ScrollLock from 'react-scrolllock';
+import React, { FC, Fragment, useCallback, useEffect, useRef } from 'react';
+import { disableBodyScroll } from 'body-scroll-lock';
 import { OverlayContext } from '../OverlayContext';
 import { AnimatePresence } from 'framer-motion';
 import { OverlayPortal } from '../OverlayPortal';
@@ -26,6 +26,7 @@ export const GlobalOverlay: FC<GlobalOverlayProps> = ({
   onClose
 }) => {
   const overlayRef = useRef<any | null>(null);
+
   const onBackdropClick = useCallback(() => {
     if (closeOnBackdropClick) {
       onClose?.();
@@ -37,6 +38,12 @@ export const GlobalOverlay: FC<GlobalOverlayProps> = ({
     open,
     onEscape: () => closeOnEscape && onClose?.()
   });
+
+  useEffect(() => {
+    if (open && children !== undefined) {
+      disableBodyScroll(children);
+    }
+  }, [children, open]);
 
   return (
     <OverlayContext.Provider value={{ close: () => onClose?.() }}>
@@ -54,7 +61,6 @@ export const GlobalOverlay: FC<GlobalOverlayProps> = ({
                   />
                 )}
                 {children({ overlayIndex, portalIndex })}
-                <ScrollLock />
               </Fragment>
             )}
           </OverlayPortal>
