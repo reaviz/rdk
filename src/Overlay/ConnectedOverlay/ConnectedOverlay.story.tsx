@@ -136,7 +136,7 @@ export const TooltipExample = () => (
   </div>
 );
 
-const Menu = ({ children, open, reference, onClose }) => (
+const Menu = ({ children, open, reference, onClose }: any) => (
   <ConnectedOverlay
     trigger="click"
     placement="bottom-start"
@@ -187,10 +187,43 @@ export const MenuExample = () => {
         onClose={() => setMenuOpen(false)}
       >
         <ul>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
+          <li onClick={() => setMenuOpen(false)}>One</li>
+          <li onClick={() => setMenuOpen(false)}>Two</li>
+          <li onClick={() => setMenuOpen(false)}>Three</li>
         </ul>
+      </Menu>
+    </div>
+  );
+};
+
+export const MenuInMenuExample = () => {
+  const buttonRef = useRef<any>(null);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
+  return (
+    <div
+      style={{
+        width: 150,
+        padding: 50,
+        height: 150,
+        border: 'solid 1px red'
+      }}
+    >
+      <button
+        type="button"
+        ref={buttonRef}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        Open
+      </button>
+      <Menu
+        reference={buttonRef}
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+      >
+        <h2>Menu In Menu</h2>
+        <p>Click outside to close</p>
+        <MenuExample />
       </Menu>
     </div>
   );

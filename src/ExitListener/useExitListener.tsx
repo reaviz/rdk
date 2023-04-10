@@ -1,4 +1,4 @@
-import { RefObject, useLayoutEffect } from 'react';
+import { RefObject, useEffect } from 'react';
 
 interface ExitListenerOptions {
   ref: RefObject<HTMLElement | null>;
@@ -13,14 +13,10 @@ export const useExitListener = ({
   onClickOutside,
   onEscape
 }: ExitListenerOptions) => {
-  useLayoutEffect(() => {
+  useEffect(() => {
     const handleClick = event => {
       const el = ref.current;
-      if (
-        !el?.contains(event.target) &&
-        !event.target.closest('.rdk-portal') &&
-        event.which !== 3
-      ) {
+      if (!el?.contains(event.target) && event.which !== 3) {
         onClickOutside?.(event);
       }
     };

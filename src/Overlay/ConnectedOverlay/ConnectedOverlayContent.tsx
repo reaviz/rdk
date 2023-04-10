@@ -5,7 +5,8 @@ import React, {
   useImperativeHandle,
   RefObject,
   useEffect,
-  useState
+  useState,
+  useCallback
 } from 'react';
 import { useExitListener } from '../../ExitListener';
 import { Placement, usePosition } from '../../Position';
@@ -39,13 +40,13 @@ export const ConnectedOverlayContent: FC<
       triggerRef,
       children,
       portalClassName,
-      closeOnBodyClick = true,
-      closeOnEscape = true,
+      closeOnBodyClick,
+      closeOnEscape,
       elementType,
-      appendToBody = true,
+      appendToBody,
       followCursor,
       modifiers,
-      placement = 'bottom',
+      placement,
       onClose
     },
     ref
@@ -63,10 +64,8 @@ export const ConnectedOverlayContent: FC<
       }
     }));
 
-    useExitListener({
-      open: true,
-      ref: positionRef,
-      onClickOutside: event => {
+    const onClickOutside = useCallback(
+      (event: any) => {
         if (closeOnBodyClick) {
           let ref: HTMLElement | null = null;
           if ((triggerRef as RefObject<HTMLElement>).current) {
@@ -75,12 +74,31 @@ export const ConnectedOverlayContent: FC<
             ref = triggerRef as HTMLElement;
           }
 
-          if (ref && !ref.contains(event.target as any)) {
-            onClose?.(event as any);
+          // Handle parent click containers
+          const container = event.target.closest('.rdk-portal');
+          const contained = container === positionRef.current;
+
+          if (
+            ref &&
+            !ref.contains(event.target) &&
+            (!container || (container && contained))
+          ) {
+            onClose?.(event);
           }
         }
       },
-      onEscape: () => closeOnEscape && onClose?.()
+      [closeOnBodyClick, onClose]
+    );
+
+    const onEscape = useCallback(() => {
+      onClose?.();
+    }, [closeOnEscape, onClose]);
+
+    useExitListener({
+      open: true,
+      ref: positionRef,
+      onClickOutside,
+      onEscape
     });
 
     useEffect(() => {
@@ -103,3 +121,10 @@ export const ConnectedOverlayContent: FC<
     );
   }
 );
+
+ConnectedOverlayContent.defaultProps = {
+  closeOnBodyClick: true,
+  closeOnEscape: true,
+  appendToBody: true,
+  placement: 'bottom'
+};

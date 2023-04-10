@@ -5,7 +5,8 @@ import React, {
   Fragment,
   forwardRef,
   Ref,
-  useImperativeHandle
+  useImperativeHandle,
+  useMemo
 } from 'react';
 import { TriggerTypes, OverlayTrigger } from '../OverlayTrigger';
 import { Placement, ReferenceProp } from '../../Position';
@@ -162,8 +163,15 @@ export const ConnectedOverlay: FC<
       }
     });
 
+    const providerValue = useMemo(
+      () => ({
+        close: () => onClose?.()
+      }),
+      [onClose]
+    );
+
     return (
-      <OverlayContext.Provider value={{ close: () => onClose?.() }}>
+      <OverlayContext.Provider value={providerValue}>
         {children && (
           <Fragment>
             {trigger ? (

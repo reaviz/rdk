@@ -44,6 +44,8 @@ presentation so the tools can be used with any visual presentation.
 - Position - Provides a flexible system for placing panels related to other elements
 - Backdrop - Blocker element overlay
 - Id - A unique ID hook
+- User Select - A user select hook
+- Cursor - A cursor hook
 
 ## 📦 Install
 
