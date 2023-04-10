@@ -1,6 +1,6 @@
 {
   "name": "rdk",
-  "version": "6.4.1",
+  "version": "6.4.2",
   "description": "React Component Developer Kit",
   "scripts": {
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 9009",
