@@ -9,7 +9,9 @@ import React, {
 import { useId } from '../../utils/useId';
 import { Portal } from '../../Portal';
 
-const portals: string[] = [];
+// NOTE: This should not be used by external consumers.
+export const portals: string[] = [];
+
 const START_INDEX = 990;
 
 export interface OverlayPortalRef {
@@ -19,17 +21,15 @@ export interface OverlayPortalRef {
 export interface OverlayPortalMountEvent {
   overlayIndex: number;
   portalIndex: number;
+  portalId: string;
   backdropIndex: number;
 }
 
 export interface OverlayPortalProps {
   appendToBody?: boolean;
   className?: string;
-  children: (props: {
-    overlayIndex: number | null;
-    portalIndex: number | null;
-    backdropIndex: number | null;
-  }) => any;
+  id?: string;
+  children: (props: OverlayPortalMountEvent) => any;
   onMount?: (event: OverlayPortalMountEvent) => void;
   onUnmount?: () => void;
 }
@@ -37,8 +37,9 @@ export interface OverlayPortalProps {
 export const OverlayPortal: FC<
   OverlayPortalProps & OverlayPortalRef
 > = forwardRef(
-  ({ className, children, onMount, onUnmount, appendToBody = true }, ref) => {
-    const id = useId();
+  ({ className, children, onMount, onUnmount, appendToBody, id }, ref) => {
+    let portalId = useId(id);
+
     const [portalIndex, setPortalIndex] = useState<number | null>(null);
     const [overlayIndex, setOverlayIndex] = useState<number | null>(null);
     const portalRef = useRef<any | null>(null);
@@ -51,18 +52,16 @@ export const OverlayPortal: FC<
         ref={portalRef}
         appendToBody={appendToBody}
         onMount={() => {
-          portals.push(id);
+          portals.push(portalId);
 
-          let pidx = portals.indexOf(id);
-          if (pidx === -1) {
-            pidx = 0;
-          }
-
+          let pidx = portals.indexOf(portalId);
           setPortalIndex(pidx);
+
           const overlayIdx = START_INDEX + pidx * 2 + 1;
           setOverlayIndex(overlayIdx);
 
           onMount?.({
+            portalId,
             overlayIndex: overlayIdx,
             portalIndex: pidx,
             backdropIndex: overlayIdx
@@ -70,13 +69,22 @@ export const OverlayPortal: FC<
         }}
         onUnmount={() => {
           onUnmount?.();
-          portals.splice(portals.indexOf(id), 1);
+          portals.splice(portals.indexOf(portalId), 1);
           setPortalIndex(null);
           setOverlayIndex(null);
         }}
       >
-        {children({ overlayIndex, portalIndex, backdropIndex: overlayIndex })}
+        {children({
+          overlayIndex: overlayIndex as number,
+          portalIndex: portalIndex as number,
+          backdropIndex: overlayIndex as number,
+          portalId
+        })}
       </Portal>
     );
   }
 );
+
+OverlayPortal.defaultProps = {
+  appendToBody: true
+};

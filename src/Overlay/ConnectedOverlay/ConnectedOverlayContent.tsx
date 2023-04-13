@@ -10,7 +10,8 @@ import React, {
 } from 'react';
 import { useExitListener } from '../../ExitListener';
 import { Placement, usePosition } from '../../Position';
-import { OverlayPortal } from '../OverlayPortal';
+import { OverlayPortal, portals } from '../OverlayPortal';
+import { useId } from '../../utils';
 
 export interface ConnectedOverlayContentRef {
   updatePosition: () => void;
@@ -51,6 +52,7 @@ export const ConnectedOverlayContent: FC<
     },
     ref
   ) => {
+    const id = useId();
     const [overlayIndex, setOverlayIndex] = useState<number | null>(null);
     const [positionRef, popperRef] = usePosition(triggerRef, {
       followCursor,
@@ -67,6 +69,7 @@ export const ConnectedOverlayContent: FC<
     const onClickOutside = useCallback(
       (event: any) => {
         if (closeOnBodyClick) {
+          // don't fire if i click the clicker
           let ref: HTMLElement | null = null;
           if ((triggerRef as RefObject<HTMLElement>).current) {
             ref = (triggerRef as RefObject<HTMLElement>).current as HTMLElement;
@@ -76,13 +79,11 @@ export const ConnectedOverlayContent: FC<
 
           // Handle parent click containers
           const container = event.target.closest('.rdk-portal');
-          const contained = container === positionRef.current;
 
-          if (
-            ref &&
-            !ref.contains(event.target) &&
-            (!container || (container && contained))
-          ) {
+          // Only close the last one
+          const isLast = portals.indexOf(id) === portals.length - 1;
+
+          if (!ref?.contains(event.target) && (isLast || !container)) {
             onClose?.(event);
           }
         }
@@ -91,7 +92,9 @@ export const ConnectedOverlayContent: FC<
     );
 
     const onEscape = useCallback(() => {
-      onClose?.();
+      if (closeOnEscape) {
+        onClose?.();
+      }
     }, [closeOnEscape, onClose]);
 
     useExitListener({
@@ -109,6 +112,7 @@ export const ConnectedOverlayContent: FC<
 
     return (
       <OverlayPortal
+        id={id}
         ref={positionRef}
         className={portalClassName}
         elementType={elementType}

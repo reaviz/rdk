@@ -9,5 +9,5 @@ const genId = () => ++id;
  */
 export const useId = (idFromProps?: string | null) => {
   const [id] = useState(idFromProps || genId());
-  return `ref-${id}`;
+  return `${id}`;
 };
