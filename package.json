@@ -1,6 +1,6 @@
 {
   "name": "rdk",
-  "version": "6.4.2",
+  "version": "6.4.3",
   "description": "React Component Developer Kit",
   "scripts": {
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 9009",
@@ -33,7 +33,7 @@
   "homepage": "https://github.com/reaviz/rdk#readme",
   "dependencies": {
     "body-scroll-lock": "^4.0.0-beta.0",
-    "classnames": "^2.3.1",
+    "classnames": "^2.3.2",
     "framer-motion": "7.8.0",
     "popper.js": "^1.16.1"
   },
@@ -56,15 +56,15 @@
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "autoprefixer": "^9.8.5",
-    "chromatic": "^6.5.3",
+    "chromatic": "^6.17.3",
     "framer-motion": "^6.2.8",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.4",
     "postcss-focus-visible": "^5.0.0",
     "prettier": "^2.1.2",
-    "react": "^18.0.0",
+    "react": "^18.2.0",
     "react-docgen-typescript-loader": "^3.7.2",
-    "react-dom": "^18.0.0",
+    "react-dom": "^18.2.0",
     "rollup": "^2.28.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
