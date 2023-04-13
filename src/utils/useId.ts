@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 let id = 0;
-const genId = () => ++id;
+const genId = () => `ref-${++id}`;
 
 /**
  * Auto-generate a id.
