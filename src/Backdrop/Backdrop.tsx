@@ -11,17 +11,22 @@ export interface BackdropProps {
 }
 
 export const Backdrop: FC<BackdropProps> = ({
-  portalIndex = 0,
-  zIndex = 998,
+  portalIndex,
+  zIndex,
   className,
-  onClick = () => undefined
+  onClick
 }) => (
   <motion.div
     className={classNames(css.backdrop, className)}
     initial={{ opacity: 0 }}
-    animate={{ opacity: 0.8 - portalIndex / 10 }}
+    animate={{ opacity: 0.8 - (portalIndex as number) / 10 }}
     exit={{ opacity: 0 }}
     style={{ zIndex }}
     onClick={onClick}
   />
 );
+
+Backdrop.defaultProps = {
+  zIndex: 998,
+  portalIndex: 0
+};
