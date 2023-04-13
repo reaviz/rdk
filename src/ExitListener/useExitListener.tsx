@@ -1,9 +1,28 @@
 import { RefObject, useEffect } from 'react';
 
 interface ExitListenerOptions {
+  /**
+   * A ref object pointing to the target element that the hook should
+   * observe for click outside and escape key events.
+   */
   ref: RefObject<HTMLElement | null>;
+
+  /**
+   * An optional boolean to enable or disable the event listeners.
+   * When set to true (default), the event listeners are active.
+   */
   open?: boolean;
+
+  /**
+   * An optional callback function that is called when a click
+   * event occurs outside the target element.
+   */
   onClickOutside?: (event: MouseEvent) => void;
+
+  /**
+   * An optional callback function that is called
+   * when the 'Escape' key is pressed.
+   */
   onEscape?: (event: KeyboardEvent) => void;
 }
 
@@ -14,28 +33,29 @@ export const useExitListener = ({
   onEscape
 }: ExitListenerOptions) => {
   useEffect(() => {
-    const handleClick = event => {
-      const el = ref.current;
-      if (!el?.contains(event.target) && event.which !== 3) {
-        onClickOutside?.(event);
+    if (!open) {
+      return;
+    }
+
+    const handleClick = (event: MouseEvent | TouchEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        onClickOutside?.(event as MouseEvent);
       }
     };
 
-    const handleKey = event => {
-      if (event.keyCode === 27) {
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.code === 'Escape') {
         onEscape?.(event);
       }
     };
 
-    if (open) {
-      if (onClickOutside) {
-        document.addEventListener('mousedown', handleClick);
-        document.addEventListener('touchstart', handleClick);
-      }
+    if (onClickOutside) {
+      document.addEventListener('mousedown', handleClick);
+      document.addEventListener('touchstart', handleClick);
+    }
 
-      if (handleKey) {
-        document.addEventListener('keydown', handleKey);
-      }
+    if (onEscape) {
+      document.addEventListener('keydown', handleKey);
     }
 
     return () => {
@@ -44,7 +64,7 @@ export const useExitListener = ({
         document.removeEventListener('touchstart', handleClick);
       }
 
-      if (handleKey) {
+      if (onEscape) {
         document.removeEventListener('keydown', handleKey);
       }
     };
