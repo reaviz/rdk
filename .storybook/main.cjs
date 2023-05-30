@@ -4,7 +4,7 @@ module.exports = {
     '@storybook/addon-docs/preset',
     'storybook-css-modules-preset'
   ],
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config) => {
 
     config.module.rules.push({
       type: 'javascript/auto',
