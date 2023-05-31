@@ -10,7 +10,8 @@
     "start": "storybook dev -p 9009",
     "storybook:ci": "storybook-to-ghpages --existing-output-dir=storybook-static --ci",
     "test": "vitest --passWithNoTests",
-    "test:coverage": "vitest run --coverage --passWithNoTests"
+    "test:coverage": "vitest run --coverage --passWithNoTests",
+    "prepare": "husky install"
   },
   "type": "module",
   "types": "dist/index.d.ts",
@@ -66,17 +67,17 @@
     "@storybook/react-vite": "^7.0.18",
     "@storybook/theming": "7.0.18",
     "@types/classnames": "^2.3.1",
-    "@types/react": "^17.0.43",
-    "@types/react-dom": "^17.0.14",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
     "@vitejs/plugin-react": "^4.0.0",
-    "@vitest/coverage-c8": "^0.31.1",
-    "autoprefixer": "^9.8.5",
-    "chromatic": "^6.17.3",
-    "husky": "^4.3.0",
+    "@vitest/coverage-c8": "^0.31.2",
+    "autoprefixer": "^10.4.14",
+    "chromatic": "^6.18.0",
+    "husky": "^8.0.3",
     "jsdom": "^22.1.0",
-    "lint-staged": "^10.5.4",
-    "postcss-focus-visible": "^5.0.0",
-    "prettier": "^2.1.2",
+    "lint-staged": "^13.2.2",
+    "postcss-focus-visible": "^8.0.2",
+    "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-dom": "^18.2.0",
@@ -90,7 +91,7 @@
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-svgr": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.0",
-    "vitest": "^0.31.1"
+    "vitest": "^0.31.2"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
@@ -106,10 +107,5 @@
     "bracketSpacing": true,
     "jsxBracketSameLine": false,
     "printWidth": 80
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
