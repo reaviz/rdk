@@ -27,27 +27,27 @@ There are five overlay components in the Overlay:
 A overlay component typically used by components like Dialogs or Drawers.
 You can use the Global Ovleray using element APIs.
 
-<Canvas of={GlobalOverlayStories.ClickToOpen} />
+<Canvas of={GlobalOverlayStories.ClickToOpen} sourceState="shown" />
 
 #### Dialog Example
 Below is an example of a simple dialog component using the global overlay.
 
-<Canvas of={GlobalOverlayStories.DialogExample} />
+<Canvas of={GlobalOverlayStories.DialogExample} sourceState="shown" />
 
 ### Connected Overlay
 A overlay component typically used by components like menus.
 
-<Canvas of={ConnectedOverlayStories.Simple} />
+<Canvas of={ConnectedOverlayStories.Simple} sourceState="shown" />
 
 #### Tooltip Example
 Below is an example of simple tooltip component using the connected overlay.
 
-<Canvas of={ConnectedOverlayStories.TooltipExample} />
+<Canvas of={ConnectedOverlayStories.TooltipExample} sourceState="shown" />
 
 #### Menu Example
 Below is an example of simple menu component using the connected overlay.
 
-<Canvas of={ConnectedOverlayStories.MenuExample} />
+<Canvas of={ConnectedOverlayStories.MenuExample} sourceState="shown" />
 
 ## API
 ### [src/Overlay/GlobalOverlay.tsx](https://github.com/reaviz/rdk/blob/master/src/Overlay/GlobalOverlay.tsx)
