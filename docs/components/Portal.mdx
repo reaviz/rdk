@@ -1,5 +1,5 @@
-import { Meta, Story, Props, Preview } from '@storybook/addon-docs';
-import { Portal } from '../../src';
+import { Canvas, Meta, Controls } from '@storybook/addon-docs';
+import * as PortalStories from '../../src/Portal/Portal.story'
 
 <Meta title="Docs/Components/Portal" />
 
@@ -15,10 +15,9 @@ via the core method in React.
 ## Demo
 This component can be used via element api.
 
-<Preview withSource="open">
-  <Story id="examples-portal--simple" />
-</Preview>
+<Canvas of={PortalStories.Simple} sourceState="shown" />
 
 ## API
 ### [src/Portal/Portal.tsx](https://github.com/reaviz/rdk/blob/master/src/Portal/Portal.tsx)
-<Props of={Portal} />
+
+<Controls of={PortalStories.Simple} />

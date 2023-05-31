@@ -90,6 +90,7 @@ export const usePosition = (
     };
 
     if (elementRef.current && popperRef) {
+      //@ts-ignore
       popper.current = new PopperJS(popperRef, elementRef.current, {
         placement: placement || 'top',
         modifiers: modifiers || {},

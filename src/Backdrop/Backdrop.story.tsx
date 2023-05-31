@@ -1,9 +1,16 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+
 import { Backdrop } from './Backdrop';
 
-export default {
+const meta: Meta<typeof Backdrop> = {
   title: 'Examples/Backdrop',
   component: Backdrop
 };
 
-export const Simple = () => <Backdrop />;
+type Story = StoryObj<typeof Backdrop>;
+
+export const Simple: Story = {
+  args: {}
+};
+
+export default meta;

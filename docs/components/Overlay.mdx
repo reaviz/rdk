@@ -1,5 +1,8 @@
-import { Meta, Story, Props, Preview } from '@storybook/addon-docs';
-import { ConnectedOverlay, GlobalOverlay, OverlayTrigger, OverlayPortal } from '../../src';
+import {Canvas, Controls, Meta} from '@storybook/addon-docs';
+import * as GlobalOverlayStories from '../../src/Overlay/GlobalOverlay/GlobalOverlay.story'
+import * as ConnectedOverlayStories from '../../src/Overlay/ConnectedOverlay/ConnectedOverlay.story'
+import * as OverlayTriggerStories from '../../src/Overlay/OverlayTrigger.story'
+import * as OverlayPortalStories from '../../src/Overlay/OverlayPortal/OverlayPortal.story'
 
 <Meta title="Docs/Components/Overlay" />
 
@@ -24,47 +27,39 @@ There are five overlay components in the Overlay:
 A overlay component typically used by components like Dialogs or Drawers.
 You can use the Global Ovleray using element APIs.
 
-<Preview withSource="open">
-  <Story id="examples-overlay-global-overlay--click-to-open" />
-</Preview>
+<Canvas of={GlobalOverlayStories.ClickToOpen} sourceState="shown" />
 
 #### Dialog Example
 Below is an example of a simple dialog component using the global overlay.
 
-<Preview withSource="open">
-  <Story id="examples-overlay-global-overlay--dialog-example" />
-</Preview>
+<Canvas of={GlobalOverlayStories.DialogExample} sourceState="shown" />
 
 ### Connected Overlay
 A overlay component typically used by components like menus.
 
-<Preview withSource="open">
-  <Story id="examples-overlay-connected-overlay--simple" />
-</Preview>
+<Canvas of={ConnectedOverlayStories.Simple} sourceState="shown" />
 
 #### Tooltip Example
 Below is an example of simple tooltip component using the connected overlay.
 
-<Preview withSource="open">
-  <Story id="examples-overlay-connected-overlay--tooltip-example" />
-</Preview>
+<Canvas of={ConnectedOverlayStories.TooltipExample} sourceState="shown" />
 
 #### Menu Example
 Below is an example of simple menu component using the connected overlay.
 
-<Preview withSource="open">
-  <Story id="examples-overlay-connected-overlay--menu-example" />
-</Preview>
+<Canvas of={ConnectedOverlayStories.MenuExample} sourceState="shown" />
 
 ## API
 ### [src/Overlay/GlobalOverlay.tsx](https://github.com/reaviz/rdk/blob/master/src/Overlay/GlobalOverlay.tsx)
-<Props of={GlobalOverlay} />
+<Controls of={GlobalOverlayStories.DialogExample} />
 
 ### [src/Overlay/ConnectedOverlay.tsx](https://github.com/reaviz/rdk/blob/master/src/Overlay/ConnectedOverlay.tsx)
-<Props of={ConnectedOverlay} />
+<Controls of={ConnectedOverlayStories.Simple} />
 
 ### [src/Overlay/OverlayTrigger.tsx](https://github.com/reaviz/rdk/blob/master/src/Overlay/OverlayTrigger.tsx)
-<Props of={OverlayTrigger} />
+
+<Controls of={OverlayTriggerStories.Simple} />
 
 ### [src/Overlay/OverlayPortal.tsx](https://github.com/reaviz/rdk/blob/master/src/Overlay/OverlayPortal.tsx)
-<Props of={OverlayPortal} />
+
+<Controls of={OverlayPortalStories.Simple} />

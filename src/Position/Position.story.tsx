@@ -1,33 +1,38 @@
+import { Meta } from '@storybook/react';
 import React, { useRef } from 'react';
 import { usePosition } from './usePosition';
 
-export default {
+const meta: Meta = {
   title: 'Examples/Position'
 };
 
-export const Simple = () => {
-  const anchorRef = useRef<HTMLDivElement | null>(null);
-  const [positionRef] = usePosition(anchorRef, { placement: 'bottom' });
+export const Simple = {
+  render: () => {
+    const anchorRef = useRef<HTMLDivElement | null>(null);
+    const [positionRef] = usePosition(anchorRef, { placement: 'bottom' });
 
-  return (
-    <div
-      style={{
-        padding: 50,
-        border: 'solid 1px red'
-      }}
-    >
+    return (
       <div
-        ref={anchorRef}
         style={{
-          width: 100,
-          height: 100,
-          background: 'black',
-          padding: 50
+          padding: 50,
+          border: 'solid 1px red'
         }}
       >
-        Hello!
+        <div
+          ref={anchorRef}
+          style={{
+            width: 100,
+            height: 100,
+            background: 'black',
+            padding: 50
+          }}
+        >
+          Hello!
+        </div>
+        <div ref={positionRef}>Positioned</div>
       </div>
-      <div ref={positionRef}>Positioned</div>
-    </div>
-  );
+    );
+  }
 };
+
+export default meta;

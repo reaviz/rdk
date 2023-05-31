@@ -2,6 +2,7 @@ import {
   useImperativeHandle,
   forwardRef,
   FC,
+  PropsWithChildren,
   useLayoutEffect,
   useRef,
   Ref,
@@ -10,7 +11,7 @@ import {
 import { createPortal } from 'react-dom';
 import { useUnmount } from '../utils/useUnmount';
 
-export interface PortalProps {
+export interface PortalProps extends PropsWithChildren {
   element?: string;
   className?: string;
   onMount?: () => void;
@@ -18,16 +19,7 @@ export interface PortalProps {
 }
 
 export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
-  (
-    {
-      children,
-      className,
-      element = 'div',
-      onMount = () => undefined,
-      onUnmount = () => undefined
-    },
-    ref
-  ) => {
+  ({ children, className, element = 'div', onMount, onUnmount }, ref) => {
     const elementRef = useRef<HTMLElement | null>(null);
     const mounted = useRef<boolean>(false);
 
@@ -63,6 +55,6 @@ export const Portal: FC<PortalProps & { ref?: Ref<HTMLElement> }> = forwardRef(
       document.body.appendChild(elementRef.current);
     }
 
-    return createPortal(children, elementRef.current);
+    return createPortal(children, elementRef.current) as JSX.Element;
   }
 );
