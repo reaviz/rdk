@@ -2,9 +2,7 @@ import React from 'react';
 import theme from './theme';
 
 const withProvider = (Story, context) => (
-  <>
-    <Story {...context} />
-  </>
+  <Story {...context} />
 );
 
 const preview = {
