@@ -14,6 +14,7 @@
     "prepare": "husky install"
   },
   "type": "module",
+  "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "main": "./dist/rdk.umd.cjs",
   "module": "./dist/rdk.js",
@@ -23,10 +24,6 @@
       "require": "./dist/rdk.umd.cjs"
     }
   },
-  "source": "src/index.ts",
-  "browser": "dist/index.js",
-  "style": "dist/index.css",
-  "typings": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/reaviz/rdk.git"
