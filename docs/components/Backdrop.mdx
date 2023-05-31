@@ -1,5 +1,6 @@
-import { Meta, Story, Props, Preview } from '@storybook/addon-docs';
-import { Backdrop } from '../../src';
+import {Canvas, Controls, Meta} from '@storybook/addon-docs';
+
+import * as BackdropStories from '../../src/Backdrop/Backdrop.story';
 
 <Meta title="Docs/Components/Backdrop" />
 
@@ -11,11 +12,9 @@ Backdrop is a component that overlays a certain viewport to
 prevent users from clicking the bottom layer and draw attention
 to the content. This component is typically used with a `Overlay` component.
 
-## Demo
-<Preview withSource="open">
-  <Story id="examples-backdrop--simple" />
-</Preview>
+<Canvas of={BackdropStories.Simple} />
 
 ## API
 ### [src/Backdrop/Backdrop.tsx](https://github.com/reaviz/rdk/blob/master/src/Backdrop/Backdrop.tsx)
-<Props of={Backdrop} />
+
+<Controls of={BackdropStories.Simple} />

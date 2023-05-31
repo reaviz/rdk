@@ -1,76 +1,83 @@
+import { Meta, StoryObj } from '@storybook/react';
 import React, { useState, useRef } from 'react';
 import { ConnectedOverlay } from './ConnectedOverlay';
 import { motion } from 'framer-motion';
 
-export default {
+const meta: Meta<typeof ConnectedOverlay> = {
   title: 'Examples/Overlay/Connected Overlay',
   component: ConnectedOverlay
 };
 
-export const Simple = () => {
-  const [visible, setVisible] = useState(false);
+type Story = StoryObj<typeof ConnectedOverlay>;
 
-  return (
-    <div
-      style={{
-        width: 300,
-        padding: 50,
-        height: 300,
-        border: 'solid 1px red'
-      }}
-    >
-      <ConnectedOverlay
-        open={visible}
-        onOpen={() => setVisible(true)}
-        onClose={() => setVisible(false)}
-        content={({ overlayIndex }) => (
-          <div
-            style={{
-              background: 'green',
-              padding: 15
-            }}
-          >
-            <h1>Hello + {overlayIndex}</h1>
-          </div>
-        )}
+export const Simple: Story = {
+  render: () => {
+    const [visible, setVisible] = useState(false);
+
+    return (
+      <div
+        style={{
+          width: 300,
+          padding: 50,
+          height: 300,
+          border: 'solid 1px red'
+        }}
       >
-        <button type="button">HiOOO!!!</button>
-      </ConnectedOverlay>
-    </div>
-  );
+        <ConnectedOverlay
+          open={visible}
+          onOpen={() => setVisible(true)}
+          onClose={() => setVisible(false)}
+          content={({ overlayIndex }) => (
+            <div
+              style={{
+                background: 'green',
+                padding: 15
+              }}
+            >
+              <h1>Hello + {overlayIndex}</h1>
+            </div>
+          )}
+        >
+          <button type="button">HiOOO!!!</button>
+        </ConnectedOverlay>
+      </div>
+    );
+  }
 };
 
-export const DefaultOpen = () => {
-  const [visible, setVisible] = useState(true);
+export const DefaultOpen: Story = {
+  render: () => {
+    const [visible, setVisible] = useState(true);
 
-  return (
-    <div
-      style={{
-        width: 300,
-        padding: 50,
-        height: 300,
-        border: 'solid 1px red'
-      }}
-    >
-      <ConnectedOverlay
-        open={visible}
-        onOpen={() => setVisible(true)}
-        onClose={() => setVisible(false)}
-        content={() => (
-          <div
-            style={{
-              background: 'black',
-              padding: 15
-            }}
-          >
-            <h1>Hello</h1>
-          </div>
-        )}
+    return (
+      <div
+        style={{
+          width: 300,
+          padding: 50,
+          height: 300,
+          border: 'solid 1px red'
+        }}
       >
-        <button type="button">HiOOO!!!</button>
-      </ConnectedOverlay>
-    </div>
-  );
+        <ConnectedOverlay
+          open={visible}
+          onOpen={() => setVisible(true)}
+          onClose={() => setVisible(false)}
+          content={() => (
+            <div
+              style={{
+                background: 'black',
+                padding: 15
+              }}
+            >
+              <h1>Hello</h1>
+            </div>
+          )}
+        >
+          <button type="button">HiOOO!!!</button>
+        </ConnectedOverlay>
+      </div>
+    );
+  }
 };
 
 const Tooltip = ({ children, content }) => {
@@ -115,26 +122,28 @@ const Tooltip = ({ children, content }) => {
   );
 };
 
-export const TooltipExample = () => (
-  <div
-    style={{
-      width: 300,
-      padding: 50,
-      height: 300,
-      border: 'solid 1px red'
-    }}
-  >
-    <Tooltip content="Hello 1">
-      <span style={{ padding: 10, background: 'blue' }}>Hover Me</span>
-    </Tooltip>
-    <br />
-    <br />
-    <br />
-    <Tooltip content="Hello 2">
-      <span style={{ padding: 10, background: 'blue' }}>Hover Me Too</span>
-    </Tooltip>
-  </div>
-);
+export const TooltipExample: Story = {
+  render: () => (
+    <div
+      style={{
+        width: 300,
+        padding: 50,
+        height: 300,
+        border: 'solid 1px red'
+      }}
+    >
+      <Tooltip content="Hello 1">
+        <span style={{ padding: 10, background: 'blue' }}>Hover Me</span>
+      </Tooltip>
+      <br />
+      <br />
+      <br />
+      <Tooltip content="Hello 2">
+        <span style={{ padding: 10, background: 'blue' }}>Hover Me Too</span>
+      </Tooltip>
+    </div>
+  )
+};
 
 const Menu = ({ children, open, reference, onClose }: any) => (
   <ConnectedOverlay
@@ -161,72 +170,95 @@ const Menu = ({ children, open, reference, onClose }: any) => (
   />
 );
 
-export const MenuExample = () => {
-  const buttonRef = useRef<any>(null);
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+export const MenuExample: Story = {
+  render: () => {
+    const buttonRef = useRef<any>(null);
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-  return (
-    <div
-      style={{
-        width: 150,
-        padding: 50,
-        height: 150,
-        border: 'solid 1px red'
-      }}
-    >
-      <button
-        type="button"
-        ref={buttonRef}
-        onClick={() => setMenuOpen(!menuOpen)}
+    return (
+      <div
+        style={{
+          width: 150,
+          padding: 50,
+          height: 150,
+          border: 'solid 1px red'
+        }}
       >
-        Open
-      </button>
-      <Menu
-        reference={buttonRef}
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
-      >
-        <ul>
-          <li onClick={() => setMenuOpen(false)}>One</li>
-          <li onClick={() => setMenuOpen(false)}>Two</li>
-          <li onClick={() => setMenuOpen(false)}>Three</li>
-        </ul>
-      </Menu>
-    </div>
-  );
+        <button
+          type="button"
+          ref={buttonRef}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          Open
+        </button>
+        <Menu
+          reference={buttonRef}
+          open={menuOpen}
+          onClose={() => setMenuOpen(false)}
+        >
+          <ul>
+            <li onClick={() => setMenuOpen(false)}>One</li>
+            <li onClick={() => setMenuOpen(false)}>Two</li>
+            <li onClick={() => setMenuOpen(false)}>Three</li>
+          </ul>
+        </Menu>
+      </div>
+    );
+  }
 };
 
-export const MenuInMenuExample = () => {
-  const buttonRef = useRef<any>(null);
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+export const MenuInMenuExample: Story = {
+  render: () => {
+    const buttonRef = useRef<any>(null);
+    const buttonInternalRef = useRef<any>(null);
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
+    const [menuSecondaryOpen, setMenuSecondaryOpen] = useState<boolean>(false);
 
-  return (
-    <div
-      style={{
-        width: 150,
-        padding: 50,
-        height: 150,
-        border: 'solid 1px red'
-      }}
-    >
-      <button
-        type="button"
-        ref={buttonRef}
-        onClick={() => setMenuOpen(!menuOpen)}
+    return (
+      <div
+        style={{
+          width: 150,
+          padding: 50,
+          height: 150,
+          border: 'solid 1px red'
+        }}
       >
-        Open
-      </button>
-      <Menu
-        reference={buttonRef}
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
-      >
-        <h2>Menu In Menu</h2>
-        <p>Click outside to close</p>
-        <MenuExample />
-      </Menu>
-    </div>
-  );
+        <button
+          type="button"
+          ref={buttonRef}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          Open
+        </button>
+        <Menu
+          reference={buttonRef}
+          open={menuOpen}
+          onClose={() => setMenuOpen(false)}
+        >
+          <h2>Menu In Menu</h2>
+          <p>Click outside to close</p>
+          <button
+            type="button"
+            ref={buttonInternalRef}
+            onClick={() => setMenuSecondaryOpen(!menuSecondaryOpen)}
+          >
+            Open
+          </button>
+          <Menu
+            reference={buttonInternalRef}
+            open={menuSecondaryOpen}
+            onClose={() => setMenuSecondaryOpen(false)}
+          >
+            <ul>
+              <li onClick={() => setMenuSecondaryOpen(false)}>One</li>
+              <li onClick={() => setMenuSecondaryOpen(false)}>Two</li>
+              <li onClick={() => setMenuSecondaryOpen(false)}>Three</li>
+            </ul>
+          </Menu>
+        </Menu>
+      </div>
+    );
+  }
 };
 
 const ContextMenu = ({ children, content }) => {
@@ -268,25 +300,29 @@ const ContextMenu = ({ children, content }) => {
   );
 };
 
-export const ContextMenuExample = () => (
-  <div
-    style={{
-      width: 300,
-      padding: 50,
-      height: 300,
-      border: 'solid 1px red'
-    }}
-  >
-    <ContextMenu
-      content={
-        <ul>
-          <li>Foo</li>
-          <li>Bar</li>
-          <li>Baz</li>
-        </ul>
-      }
+export const ContextMenuExample: Story = {
+  render: () => (
+    <div
+      style={{
+        width: 300,
+        padding: 50,
+        height: 300,
+        border: 'solid 1px red'
+      }}
     >
-      <span style={{ padding: 10, background: 'blue' }}>Hi!</span>
-    </ContextMenu>
-  </div>
-);
+      <ContextMenu
+        content={
+          <ul>
+            <li>Foo</li>
+            <li>Bar</li>
+            <li>Baz</li>
+          </ul>
+        }
+      >
+        <span style={{ padding: 10, background: 'blue' }}>Hi!</span>
+      </ContextMenu>
+    </div>
+  )
+};
+
+export default meta;
