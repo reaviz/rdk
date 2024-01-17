@@ -1,7 +1,14 @@
 import { useRef, useLayoutEffect, RefObject, useMemo } from 'react';
-import PopperJS from 'popper.js';
+import {
+  Placement as FloatingUIPlacement,
+  Middleware,
+  computePosition,
+  flip,
+  limitShift,
+  shift
+} from '@floating-ui/dom';
 
-export type Placement = PopperJS.Placement;
+export type Placement = FloatingUIPlacement;
 
 export type ReferenceProp =
   | ReferenceObject
@@ -17,7 +24,7 @@ export interface ReferenceObject {
 
 export interface PositionOptions {
   placement?: Placement;
-  modifiers?: PopperJS.Modifiers;
+  modifiers?: [Middleware];
   followCursor?: boolean;
 }
 
@@ -26,14 +33,10 @@ export const usePosition = (
   { followCursor, placement, modifiers }: PositionOptions = {}
 ) => {
   const elementRef = useRef<any | null>(null);
-  const popper = useRef<PopperJS | null>(null);
   const mouse = useRef<{ pageX: number; pageY: number }>({
     pageX: 0,
     pageY: 0
   });
-
-  // Find the real reference pointer for updating
-  const refPointer = (reference as RefObject<HTMLElement>).current;
 
   const popperRef = useMemo(() => {
     const refObj = reference as RefObject<HTMLElement>;
@@ -73,41 +76,47 @@ export const usePosition = (
     }
 
     return refElement;
-  }, [followCursor, reference, refPointer, mouse]);
+  }, [followCursor, (reference as RefObject<HTMLElement>)?.current, mouse]);
 
   useLayoutEffect(() => {
     let rqf;
 
     const onMouseMove = ({ pageX, pageY }: MouseEvent) => {
       mouse.current = { pageX, pageY };
-      popper.current?.scheduleUpdate();
     };
 
     const onWindowScroll = () => {
-      rqf = requestAnimationFrame(() => {
-        popper.current?.scheduleUpdate();
-      });
+      rqf = requestAnimationFrame(() => {});
     };
 
     if (elementRef.current && popperRef) {
-      //@ts-ignore
-      popper.current = new PopperJS(popperRef, elementRef.current, {
-        placement: placement || 'top',
-        modifiers: modifiers || {},
-        onCreate: () => {
-          window.addEventListener('scroll', onWindowScroll);
-
-          if (followCursor) {
-            window.addEventListener('mousemove', onMouseMove);
-          }
-        }
+      Object.assign(elementRef.current.style, {
+        width: 'max-content',
+        position: 'absolute',
+        top: 0,
+        left: 0
       });
+
+      //@ts-ignore
+      computePosition(popperRef, elementRef.current, {
+        placement: placement || 'top',
+        middleware: modifiers || [flip(), shift({ limiter: limitShift() })]
+      }).then(({ x, y }) => {
+        Object.assign(elementRef.current.style, {
+          left: `${x}px`,
+          top: `${y}px`
+        });
+      });
+
+      window.addEventListener('scroll', onWindowScroll);
+
+      if (followCursor) {
+        window.addEventListener('mousemove', onMouseMove);
+      }
     }
 
     return () => {
       if (!elementRef.current) {
-        popper.current?.destroy();
-
         cancelAnimationFrame(rqf);
         window.removeEventListener('scroll', onWindowScroll);
 
@@ -118,12 +127,5 @@ export const usePosition = (
     };
   }, [elementRef.current]);
 
-  useLayoutEffect(() => {
-    if (popper.current) {
-      popper.current.reference = popperRef as any;
-      popper.current.scheduleUpdate();
-    }
-  }, [popperRef]);
-
-  return [elementRef, popper];
+  return elementRef;
 };

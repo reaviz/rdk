@@ -9,7 +9,7 @@ const meta: Meta = {
 export const Simple = {
   render: () => {
     const anchorRef = useRef<HTMLDivElement | null>(null);
-    const [positionRef] = usePosition(anchorRef, { placement: 'bottom' });
+    const positionRef = usePosition(anchorRef, { placement: 'bottom' });
 
     return (
       <div

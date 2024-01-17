@@ -40,10 +40,10 @@
   },
   "homepage": "https://github.com/reaviz/rdk#readme",
   "dependencies": {
+    "@floating-ui/dom": "^1.5.4",
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.2",
-    "framer-motion": "^10.16.16",
-    "popper.js": "^1.16.1"
+    "framer-motion": "^10.16.16"
   },
   "peerDependencies": {
     "react": ">=16",
