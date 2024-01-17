@@ -4,18 +4,13 @@ import React, {
   useEffect,
   Fragment,
   forwardRef,
-  Ref,
-  useImperativeHandle,
   useMemo
 } from 'react';
 import { TriggerTypes, OverlayTrigger } from '../OverlayTrigger';
 import { Placement, ReferenceProp } from '../../Position';
 import { AnimatePresence } from 'framer-motion';
 import { OverlayContext } from '../../Overlay/OverlayContext';
-import {
-  ConnectedOverlayContent,
-  ConnectedOverlayContentRef
-} from './ConnectedOverlayContent';
+import { ConnectedOverlayContent } from './ConnectedOverlayContent';
 
 export interface OverlayEvent {
   /**
@@ -116,11 +111,7 @@ export interface ConnectedOverlayProps {
   onClose?: (event?: any) => void;
 }
 
-export const ConnectedOverlay: FC<
-  ConnectedOverlayProps & {
-    ref?: Ref<ConnectedOverlayContentRef>;
-  }
-> = forwardRef(
+export const ConnectedOverlay: FC<ConnectedOverlayProps> = forwardRef(
   (
     {
       reference,
@@ -138,14 +129,7 @@ export const ConnectedOverlay: FC<
   ) => {
     const mounted = useRef<boolean>(false);
     const overlayTriggerRef = useRef<any | null>(null);
-    const contentRef = useRef<any | null>(null);
     const triggerRef = reference || overlayTriggerRef;
-
-    useImperativeHandle(ref, () => ({
-      updatePosition: () => {
-        contentRef.current?.updatePosition();
-      }
-    }));
 
     useEffect(() => {
       if (mounted.current) {
@@ -194,7 +178,6 @@ export const ConnectedOverlay: FC<
           {open && (
             <ConnectedOverlayContent
               {...rest}
-              ref={contentRef}
               triggerRef={triggerRef}
               onClose={onClose}
             >
