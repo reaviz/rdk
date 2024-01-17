@@ -102,8 +102,6 @@ export const usePosition = (
         placement: placement || 'top',
         middleware: modifiers || [flip(), shift({ limiter: limitShift() })]
       }).then(({ x, y }) => {
-        console.log(x, y);
-
         Object.assign(elementRef.current.style, {
           left: `${x}px`,
           top: `${y}px`

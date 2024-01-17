@@ -125,7 +125,7 @@ export const ConnectedOverlay: FC<ConnectedOverlayProps> = forwardRef(
       onClose,
       ...rest
     },
-    ref
+    _ref
   ) => {
     const mounted = useRef<boolean>(false);
     const overlayTriggerRef = useRef<any | null>(null);

@@ -45,7 +45,7 @@ export const ConnectedOverlayContent: FC<ConnectedOverlayContentProps> =
         placement,
         onClose
       },
-      ref
+      _ref
     ) => {
       const id = useId();
       const [overlayIndex, setOverlayIndex] = useState<number | null>(null);
