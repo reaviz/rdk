@@ -42,7 +42,7 @@
   "dependencies": {
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.2",
-    "framer-motion": "^10.16.16",
+    "framer-motion": "^11.0.6",
     "popper.js": "^1.16.1"
   },
   "peerDependencies": {
@@ -56,13 +56,13 @@
   },
   "devDependencies": {
     "@storybook/addon-docs": "^7.0.18",
-    "@storybook/addon-essentials": "7.0.18",
-    "@storybook/addon-mdx-gfm": "7.0.18",
+    "@storybook/addon-essentials": "^7.6.17",
+    "@storybook/addon-mdx-gfm": "^7.6.17",
     "@storybook/addon-storysource": "^7.0.18",
-    "@storybook/addons": "7.0.18",
-    "@storybook/react": "7.0.18",
+    "@storybook/addons": "^7.6.17",
+    "@storybook/react": "^7.6.17",
     "@storybook/react-vite": "^7.0.18",
-    "@storybook/theming": "7.0.18",
+    "@storybook/theming": "^7.6.17",
     "@types/classnames": "^2.3.1",
     "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
@@ -79,7 +79,7 @@
     "react-docgen-typescript-loader": "^3.7.2",
     "react-dom": "^18.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.3",
-    "storybook": "7.0.18",
+    "storybook": "^7.6.17",
     "storybook-css-modules-preset": "^1.1.1",
     "typescript": "^4.9.5",
     "vite": "^4.3.9",
