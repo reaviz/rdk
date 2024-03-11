@@ -83,7 +83,9 @@ export const GlobalOverlay: FC<GlobalOverlayProps> = ({
                     className={backdropClassName}
                   />
                 )}
-                {children({ overlayIndex, portalIndex })}
+                <div body-scroll-lock-ignore="true">
+                  {children({ overlayIndex, portalIndex })}
+                </div>
               </Fragment>
             )}
           </OverlayPortal>

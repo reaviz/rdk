@@ -34,18 +34,6 @@ Below is an example of a simple dialog component using the global overlay.
 
 <Canvas of={GlobalOverlayStories.DialogExample} sourceState="shown" />
 
-If you need scrolling within a dialog to work on iOS, you can use the `body-scroll-lock-ignore` attribute on the scrollable dialog content.
-
-```tsx
-<GlobalOverlay
-  // ...props
->
-  <div body-scroll-lock-ignore>
-    <p>Scrolling content</p>
-  </div>
-</GlobalOverlay>
-```
-
 ### Connected Overlay
 A overlay component typically used by components like menus.
 
