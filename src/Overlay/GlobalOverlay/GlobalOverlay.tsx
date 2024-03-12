@@ -1,5 +1,8 @@
 import React, { FC, Fragment, useCallback, useEffect, useRef } from 'react';
-import { disableBodyScroll } from 'body-scroll-lock';
+import {
+  disableBodyScroll,
+  clearAllBodyScrollLocks
+} from 'body-scroll-lock-upgrade';
 import { OverlayContext } from '../OverlayContext';
 import { AnimatePresence } from 'framer-motion';
 import { OverlayPortal } from '../OverlayPortal';
@@ -40,9 +43,29 @@ export const GlobalOverlay: FC<GlobalOverlayProps> = ({
   });
 
   useEffect(() => {
-    if (open && children !== undefined) {
-      disableBodyScroll(children);
+    if (open && overlayRef.current !== undefined) {
+      disableBodyScroll(overlayRef.current, {
+        // allowTouchMove determines which elements to allow touchmove events for iOS https://github.com/rick-liruixin/body-scroll-lock-upgrade?tab=readme-ov-file#allowtouchmove
+        //@ts-expect-error: allowTouchMove is typed wrong: https://github.com/rick-liruixin/body-scroll-lock-upgrade/issues/21
+        allowTouchMove: (el: HTMLElement) => {
+          while (el && el !== document.body) {
+            if (el.getAttribute('body-scroll-lock-ignore') !== null) {
+              return true;
+            }
+            if (el.parentElement !== null) {
+              el = el.parentElement;
+            }
+          }
+          return false;
+        }
+      });
+    } else {
+      clearAllBodyScrollLocks();
     }
+
+    return () => {
+      clearAllBodyScrollLocks();
+    };
   }, [children, open]);
 
   return (
@@ -60,7 +83,9 @@ export const GlobalOverlay: FC<GlobalOverlayProps> = ({
                     className={backdropClassName}
                   />
                 )}
-                {children({ overlayIndex, portalIndex })}
+                <div body-scroll-lock-ignore="true">
+                  {children({ overlayIndex, portalIndex })}
+                </div>
               </Fragment>
             )}
           </OverlayPortal>
