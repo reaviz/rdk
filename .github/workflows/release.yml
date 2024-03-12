@@ -24,7 +24,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Build Storybook
-        run: yarn build-storybook
+        run: npm run build-storybook
 
       - name: Publish Storybook to GH Pages
         if: success()
@@ -35,6 +35,3 @@ jobs:
           jekyll: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish Chromatic
-        run: yarn chromatic

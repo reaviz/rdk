@@ -4,7 +4,6 @@
   "description": "React Component Developer Kit",
   "scripts": {
     "build": "vite build --mode library",
-    "chromatic": "chromatic --project-token=uktab5dt17b --exit-zero-on-changes",
     "build-storybook": "storybook build",
     "prettier": "prettier --loglevel warn --write 'src/**/*.{ts,tsx,js,jsx}'",
     "start": "storybook dev -p 9009",
@@ -69,7 +68,6 @@
     "@vitejs/plugin-react": "^4.0.0",
     "@vitest/coverage-c8": "^0.31.2",
     "autoprefixer": "^10.4.14",
-    "chromatic": "^6.18.0",
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "lint-staged": "^13.2.2",
