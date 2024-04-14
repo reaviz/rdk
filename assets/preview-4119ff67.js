@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime-9c4ae004.js";import{c as o}from"./chunk-EIRT5I3Z-f0a10e90.js";import"./index-1b03fe98.js";const s=o({base:"dark",brandTitle:"RDK",brandUrl:"https://github.com/reaviz/rdk"}),a=(r,t)=>e.jsx(r,{...t}),d={decorators:[a],parameters:{layout:"centered",controls:{hideNoControlsWarning:!0},docs:{theme:s}}};export{d as default};
